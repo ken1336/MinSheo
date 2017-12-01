@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "260476018414",
+    "firebase_url": "https://sehonmin.firebaseio.com",
+    "project_id": "sehonmin",
+    "storage_bucket": "sehonmin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260476018414:android:ef1d731b02cddc5e",
+        "android_client_info": {
+          "package_name": "applicaton.android.com.sehonmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260476018414-nm14l41mmkvsnk733ajen8okegfmvta8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "applicaton.android.com.sehonmin",
+            "certificate_hash": "084bb26a74d8b482d29d3a72263b52831d359431"
+          }
+        },
+        {
+          "client_id": "260476018414-o3l06akp66in6ciq9a19ehbgt017efu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2hxeATOXGy4rxTe_AvkbLATpnr0TJ0DE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260476018414-o3l06akp66in6ciq9a19ehbgt017efu8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
