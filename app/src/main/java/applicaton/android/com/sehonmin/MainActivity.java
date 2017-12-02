@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText edit_password;
     private Button signup_btn;
     private User user;
-
+//commit test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
