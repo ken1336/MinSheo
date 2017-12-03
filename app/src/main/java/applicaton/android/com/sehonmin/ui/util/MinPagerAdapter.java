@@ -1,7 +1,10 @@
 package applicaton.android.com.sehonmin.ui.util;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.ListFragment;
 
+import applicaton.android.com.sehonmin.data.util.PhoneBookManager;
 import applicaton.android.com.sehonmin.ui.core.FirstFragment;
 import applicaton.android.com.sehonmin.ui.core.SecondFragment;
 import applicaton.android.com.sehonmin.ui.core.ThirdFragment;
@@ -10,26 +13,35 @@ import applicaton.android.com.sehonmin.ui.core.ThirdFragment;
  * Created by ken13 on 2017-12-02.
  */
 
-public class MinPagerAdapter extends FragmentStatePagerAdapter{
-    public MinPagerAdapter(android.support.v4.app.FragmentManager fm)
-    {
+public class MinPagerAdapter extends FragmentStatePagerAdapter {
+
+    public MinPagerAdapter(android.support.v4.app.FragmentManager fm) {
         super(fm);
     }
+
     @Override
-    public android.support.v4.app.Fragment getItem(int position)
+    public ListFragment getItem(int position)
     {
-        switch(position)
-        {
+        ListFragment listFragment;
+        switch(position) {
             case 0:
-                return FirstFragment.getInstance();
+                listFragment =  new FirstFragment();
+                listFragment.setListAdapter(PhoneBookManager.getInstance().getPhoneNumberAdapter());
+                break;
             case 1:
-                return SecondFragment.getInstance();
+                listFragment =  new SecondFragment();
+                //listFragment.setListAdapter(PhoneBookManager.getInstance().getPhoneNumberAdapter());
+                break;
             case 2:
-                return ThirdFragment.getInstance();
+                listFragment =  new ThirdFragment();
+                //listFragment.setListAdapter(PhoneBookManager.getInstance().getPhoneNumberAdapter());
+                break;
             default:
                 return null;
         }
+        return listFragment;
     }
+
     @Override
     public int getCount()
     {

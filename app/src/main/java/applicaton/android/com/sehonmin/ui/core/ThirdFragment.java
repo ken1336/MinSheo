@@ -1,38 +1,14 @@
 package applicaton.android.com.sehonmin.ui.core;
 
-
-import android.os.Bundle;
-
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.v4.app.ListFragment;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ListView;
 
-import applicaton.android.com.sehonmin.R;
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class ThirdFragment extends Fragment {
-
-
-    private static Fragment instance;
-
-    public static Fragment getInstance(){
-        if(instance==null){
-            instance= new ThirdFragment();
-        }
-
-        return instance;
-    }
-
-
+public class ThirdFragment extends ListFragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_third, container, false);
+    public void onListItemClick (ListView l, View v, int position, long id) {
+        String strText = (String) l.getItemAtPosition(position) ;
     }
 
 }
