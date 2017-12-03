@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+
+    <!-- update the version number as needed -->
+      <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+  </head>
+  <body>
+    <!-- Value -->
+    <pre id="object"></pre>
+    <pre id="object2"></pre>
+    <!-- Child -->
+    <ul id = "list">
+
+    </ul>
+    
+    <form id="survey" method="get" action="submit.html">
+	</form> 
+	
+    <script src="app.js"></script>
+    <script>
+      // Initialize Firebase
+      
+      const preObject = document.getElementById('object');
+      const preObject2 = document.getElementById('object2');
+      const ulList = document.getElementById('list');
+      const form = document.getElementById('survey');
+      
+      // url 파라미터 가져오는 부분
+      var numOfPara = 0;
+      var query = document.location.href.split("?");
+      var para = query[1].split("&");
+      var formid = para[0].split("=")[1];
+      var paraArr = new Array(100);
+      
+      var formid2 = document.createElement('input');
+      formid2.type = 'hidden';
+      formid2.name = 'survey';
+      formid2.value = formid;
+      form.appendChild(formid2);
+      
+      const dbRef = firebase.database().ref('database/form/'+formid).orderByKey();
+      
+      function submitfunc(){
+    	var query="submit.html?survey="+formid;	 
+     	
+    	  for(var i = 0; i < numOfPara; i++){
+    		query += "&";
+    		query += encodeURI(paraArr[i].name);
+    		query += "=";
+    		query += encodeURI(paraArr[i].value);  
+    	  }
+    	  
+    	  location.href = query;
+      }
+      
+      dbRef.once('value').then( snap => {
+    	  snap.forEach(function(childSnapshot) {  
+    	      var inputtext = document.createElement('pre');
+    	      inputtext.innerText = childSnapshot.key;
+    	      
+    	      var inputbox = document.createElement('input');
+    	      inputbox.type = 'text';
+    	      inputbox.name = childSnapshot.key;
+    	      
+    	      paraArr[numOfPara++] = inputbox;
+    	      
+    	      form.appendChild(inputtext);
+    	      form.appendChild(inputbox);
+    	  });
+    	  form.appendChild(document.createElement('pre'));
+    	  var submit = document.createElement('input');
+    	  submit.type = 'button';
+    	  submit.onclick = submitfunc;
+    	  submit.value = '제출하기';
+    	  form.appendChild(submit);
+    	  
+      });
+    </script>
+    
+	
+  </body>
+</html>

@@ -1,0 +1,36 @@
+
+<html>
+<head>
+<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+<script src="app.js"></script>
+<script>
+var query = document.location.href.split("?");
+var para = query[1].split("&");
+var formid = para[0].split("=")[1];
+var i;
+
+var myArray = new Array(para.length);
+
+for(i = 1; i < para.length; i++){
+	
+	var tmp = para[i].split("=");
+	myArray[i] = new Array(2);
+	myArray[i][0] = decodeURI(tmp[0]);
+	myArray[i][1] = decodeURI(tmp[1]);
+}
+
+var result = { };
+for(i = 1; i < para.length; i++){
+	//alert(myArray[i][0]+"//"+myArray[i][1]);
+	result[myArray[i][0]] = myArray[i][1]; 
+}
+
+const dbRef = firebase.database().ref('database/result/'+formid+'/'+myArray[1][1]);
+dbRef.set(result);
+
+</script>
+</head>
+<body>
+<p>조사에 응해주셔서 감사합니다.</p>
+</body>
+</html>
