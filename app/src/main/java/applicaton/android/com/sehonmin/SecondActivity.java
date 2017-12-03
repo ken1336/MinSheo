@@ -3,16 +3,12 @@ package applicaton.android.com.sehonmin;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
+import applicaton.android.com.sehonmin.db.service.FormManager;
 import applicaton.android.com.sehonmin.ui.util.MinPagerAdapter;
 
 public class SecondActivity extends AppCompatActivity implements View.OnClickListener {
@@ -25,35 +21,38 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     View.OnClickListener movePageListener;
 
 
+    DatabaseReference myRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-       ////////////////////데이터베이스 테스트aa
-       /* FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-        myRef.setValue("Hello, World!");
 
 
 
+        FormManager fm=new FormManager();
+        fm.createForm("form1","min");
+        fm.createFiled("name");
+        fm.createFiled("id");
+        fm.createFiled("num");
+        fm.submitData();
+        fm.createForm("form12","min");
+        fm.createFiled("name12");
+        fm.createFiled("id12");
+        fm.createFiled("num12");
+        fm.submitData();
+        fm.deleteForm("form1");
+        /*fm.createForm("form1");
+        fm.createFiled("name", "min");
+        fm.createFiled("name1", "min1");*/
 
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d("min", "Value is: " + value);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("min", "Failed to read value.", error.toException());
-            }
-        });*/
+
+
+
+
+
 
 
 

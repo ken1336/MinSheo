@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/MinSheo.iml" filepath="$PROJECT_DIR$/.idea/MinSheo.iml" />
+      <module fileurl="file://D:\download\SehoNMin\.idea\MinSheo.iml" filepath="D:\download\SehoNMin\.idea\MinSheo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SehoNMin.iml" filepath="$PROJECT_DIR$/SehoNMin.iml" />
       <module fileurl="file://C:\Users\Park\AndroidStudioProjects\MinSheo\SehoNMin.iml" filepath="C:\Users\Park\AndroidStudioProjects\MinSheo\SehoNMin.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
