@@ -7,6 +7,7 @@ import android.os.Handler;
 
 /**
  * Created by Park on 2017-12-03.
+ * Modified by Park on 2017-12-03 19:28
  */
 
 public class SplashActivity extends Activity {

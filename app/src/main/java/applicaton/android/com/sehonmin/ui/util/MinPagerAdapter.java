@@ -11,6 +11,7 @@ import applicaton.android.com.sehonmin.ui.core.ThirdFragment;
 
 /**
  * Created by ken13 on 2017-12-02.
+ * Modified by Park on 2017-12-03 19:28
  */
 
 public class MinPagerAdapter extends FragmentStatePagerAdapter {

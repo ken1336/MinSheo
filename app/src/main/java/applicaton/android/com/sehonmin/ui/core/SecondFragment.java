@@ -4,6 +4,10 @@ import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
 
+/*
+* Modified by Park on 2017-12-03 19:28
+* */
+
 public class SecondFragment extends ListFragment {
 
     @Override

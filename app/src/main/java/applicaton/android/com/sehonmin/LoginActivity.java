@@ -10,6 +10,7 @@ import applicaton.android.com.sehonmin.usermanagement.core.User;
 
 /**
  * Created by Park on 2017-12-03.
+ * Modified by Park on 2017-12-03 19:28
  */
 
 public class LoginActivity extends Activity {

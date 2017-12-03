@@ -1,9 +1,6 @@
 package applicaton.android.com.sehonmin;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,15 +36,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setViewPager();
         setOnclickListener();
 
-       /* fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        ListFragment listFragment =  new FirstFragment();
-        listFragment.setListAdapter(PhoneBookManager.getInstance(this).getPhoneNumberAdapter());
-
-        fragmentTransaction.add(R.id.fragmentBorC, listFragment);
-
-        fragmentTransaction.commit();*/
     }
 
     public void setViewPager(){
