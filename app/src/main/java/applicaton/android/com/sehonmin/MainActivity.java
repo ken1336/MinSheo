@@ -1,7 +1,6 @@
 package applicaton.android.com.sehonmin;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText edit_password;
     private Button signup_btn;
     private User user;
-    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         edit_password=(EditText)findViewById(R.id._password);
         signup_btn=(Button)findViewById(R.id._signup);
         user=User.getInstance(this);
-        Log.i("kkk", "user:  "+ user);
 
 
 
@@ -54,9 +51,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                if(user.logIn(edit_id.getText().toString(), edit_password.getText().toString())){
                    Toast.makeText(MainActivity.this, "hello", Toast.LENGTH_SHORT).show();
-                   intent=new Intent(getApplicationContext(),SecondActivity.class);
-                   startActivity(intent);
-
                 }
 
 
