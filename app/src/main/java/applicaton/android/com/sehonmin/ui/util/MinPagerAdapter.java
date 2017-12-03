@@ -21,9 +21,9 @@ public class MinPagerAdapter extends FragmentStatePagerAdapter{
         switch(position)
         {
             case 0:
-                return FirstFragment.getInstance();
+                return new FirstFragment();
             case 1:
-                return SecondFragment.getInstance();
+                return new SecondFragment();
             case 2:
                 return ThirdFragment.getInstance();
             default:

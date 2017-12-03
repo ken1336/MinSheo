@@ -30,7 +30,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-       ////////////////////데이터베이스 테스트
+       ////////////////////데이터베이스 테스트aa
        /* FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
 
