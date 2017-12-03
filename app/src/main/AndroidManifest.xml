@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="applicaton.android.com.sehonmin">
-
+    <!-- Modified by Park 2017-12-23 19:30 -->
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     <application
