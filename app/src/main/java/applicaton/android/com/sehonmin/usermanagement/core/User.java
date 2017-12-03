@@ -40,7 +40,7 @@ public class User{
     }
 
     public boolean logIn(String email, String password){
-        Log.i("kkkk","login");
+        Log.i("kkkk","login :" +email+","+ password);
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
