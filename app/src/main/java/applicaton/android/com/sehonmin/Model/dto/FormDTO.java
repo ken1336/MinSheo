@@ -13,23 +13,24 @@ public class FormDTO {
     private String formName;
     private Map<String, Object> map;
 
-    public FormDTO(String formName){
-        this.formName=formName;
+    public FormDTO(){}
+    public FormDTO(String formName,String id){
         map=new HashMap<>();
+        this.formName=formName;
+        map.put("id", id);
     }
-
     public String getFormName(){
         return formName;
     }
     public void put(String key, Object obj){
         map.put(key, obj);
     }
-
     public void remove(String key){
         map.remove(key);
-    }
 
-    public Map<String, Object> getElement(){
+    }
+    public Map<String, Object> getElements(){
         return map;
     }
+
 }

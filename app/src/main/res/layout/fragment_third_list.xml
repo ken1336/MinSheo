@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="applicaton.android.com.sehonmin.ui.core.ThirdFragment">
+    tools:context="applicaton.android.com.sehonmin.ui.core.ThirdListFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

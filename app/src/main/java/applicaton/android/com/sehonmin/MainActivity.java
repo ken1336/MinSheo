@@ -1,78 +1,66 @@
 package applicaton.android.com.sehonmin;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.support.annotation.NonNull;
+import android.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
-import applicaton.android.com.sehonmin.usermanagement.core.User;
+import java.util.ArrayList;
+import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+import applicaton.android.com.sehonmin.data.util.PhoneBookManager;
+import applicaton.android.com.sehonmin.ui.core.FirstFragment;
+import applicaton.android.com.sehonmin.ui.util.MinPagerAdapter;
 
-    private final static String TAG="debug from min";
-    private Button login_btn;
-    private EditText edit_id;
-    private EditText edit_password;
-    private Button signup_btn;
-    private User user;
-    private Intent intent;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+    private Button first_fragment_btn;
+    private Button second_fragment_btn;
+    private Button third_fragment_btn;
+    private FragmentManager fragmentManager;
+    private FirstFragment ft;
+    private ListView listView;
+    private ArrayList<Map<String, String>> dataList;
+    private SimpleAdapter adapter;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity);
-        login_btn=(Button)findViewById(R.id._login);
-        edit_id=(EditText)findViewById(R.id._id);
-        edit_password=(EditText)findViewById(R.id._password);
-        signup_btn=(Button)findViewById(R.id._signup);
-        user=User.getInstance(this);
+        setContentView(R.layout.activity_main);
 
-
-
-
-
-        /*mAuthListener = new FirebaseAuth.AuthStateListener() { // 인증 상태 리스너
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    Log.d("1", "onAuthStateChanged:signed_in:" + user.getUid());
-                } else {
-                    Log.d("1", "onAuthStateChanged:signed_out");
-                }
-            }
-        };*/
-        login_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               if(user.logIn(edit_id.getText().toString(), edit_password.getText().toString())){
-                   Toast.makeText(MainActivity.this, "hello", Toast.LENGTH_SHORT).show();
-                   intent=new Intent(getApplicationContext(),SecondActivity.class);
-                   startActivity(intent);
-                }
-
-
-            }
-        });
-
-        signup_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                user.signUp(edit_id.getText().toString(), edit_password.getText().toString());
-            }
-        });
+        PhoneBookManager.getInstance(this);
+        setViewPager();
+        setOnclickListener();
 
     }
 
+    public void setViewPager(){
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setAdapter(new MinPagerAdapter(getSupportFragmentManager()));
+        viewPager.setCurrentItem(0);
+    }
 
+    public void setOnclickListener() {
+        first_fragment_btn = (Button) findViewById(R.id.btn_first);
+        second_fragment_btn = (Button) findViewById(R.id.btn_second);
+        third_fragment_btn = (Button) findViewById(R.id.btn_third);
 
+        first_fragment_btn.setOnClickListener(this);
+        first_fragment_btn.setTag(0);
+        second_fragment_btn.setOnClickListener(this);
+        second_fragment_btn.setTag(1);
+        third_fragment_btn.setOnClickListener(this);
+        third_fragment_btn.setTag(2);
+    }
 
-
+    @Override
+    public void onClick(View view) {
+        int tag = (int) view.getTag();
+        viewPager.setCurrentItem(tag);
+    }
 
 }

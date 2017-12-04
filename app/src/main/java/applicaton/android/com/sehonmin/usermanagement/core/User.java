@@ -1,6 +1,7 @@
 package applicaton.android.com.sehonmin.usermanagement.core;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,7 +14,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import applicaton.android.com.sehonmin.LoginActivity;
 import applicaton.android.com.sehonmin.MainActivity;
+import applicaton.android.com.sehonmin.SplashActivity;
 
 /**
  * Created by ken13 on 2017-11-29.
@@ -25,6 +28,7 @@ public class User{
     private Activity activity;
     public static User instance;
     private boolean accessibility;
+
     private User(Activity activity){
         mAuth = FirebaseAuth.getInstance();
         Log.i(USERTAG,"어떠: "+ mAuth.toString());
@@ -50,6 +54,7 @@ public class User{
                             Log.d(USERTAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Log.i("kkkk","login:"+user.getEmail());
+                            activity.startActivity(new Intent(activity,MainActivity.class));
                             accessibility=true;
                         } else {
                             // If sign in fails, display a message to the user.
