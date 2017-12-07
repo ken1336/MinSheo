@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import applicaton.android.com.sehonmin.data.util.PhoneBookManager;
+import applicaton.android.com.sehonmin.Model.service.FormManager;
+import applicaton.android.com.sehonmin.Model.service.ResultManager;
 import applicaton.android.com.sehonmin.ui.core.FirstFragment;
 import applicaton.android.com.sehonmin.ui.util.MinPagerAdapter;
 
@@ -26,7 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<Map<String, String>> dataList;
     private SimpleAdapter adapter;
     private ViewPager viewPager;
-
+    FormManager fm=FormManager.getInstance();
+    ResultManager rm= ResultManager.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +39,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setViewPager();
         setOnclickListener();
 
+
+
     }
+
 
     public void setViewPager(){
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -45,16 +51,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setOnclickListener() {
+
         first_fragment_btn = (Button) findViewById(R.id.btn_first);
         second_fragment_btn = (Button) findViewById(R.id.btn_second);
         third_fragment_btn = (Button) findViewById(R.id.btn_third);
 
         first_fragment_btn.setOnClickListener(this);
         first_fragment_btn.setTag(0);
-        second_fragment_btn.setOnClickListener(this);
+        second_fragment_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int tag = (int) view.getTag();
+                viewPager.setCurrentItem(tag);
+
+            }
+        });
         second_fragment_btn.setTag(1);
-        third_fragment_btn.setOnClickListener(this);
+        third_fragment_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int tag = (int) view.getTag();
+                viewPager.setCurrentItem(tag);
+
+            }
+        });
         third_fragment_btn.setTag(2);
+
     }
 
     @Override

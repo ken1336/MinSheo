@@ -5,4 +5,5 @@ package applicaton.android.com.sehonmin.observer;
  */
 
 public interface Subject {
+     void notifyObservers();
 }

@@ -23,7 +23,7 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity);
+        setContentView(R.layout.activity_login);
 
         idText = (EditText) findViewById(R.id.editid);
         pwText = (EditText) findViewById(R.id.editpw);
@@ -39,6 +39,9 @@ public class LoginActivity extends Activity {
                 user.logIn(id,pw);
             }
         });
+
+
+
 
     }
 

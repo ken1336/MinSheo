@@ -28,6 +28,8 @@ public class User{
     private Activity activity;
     public static User instance;
     private boolean accessibility;
+    //private static String userID;
+    private final static String userID="min";
 
     private User(Activity activity){
         mAuth = FirebaseAuth.getInstance();
@@ -42,6 +44,9 @@ public class User{
         return instance;
 
     }
+    public static String getUserID(){
+        return userID;
+    }
 
     public boolean logIn(String email, String password){
         Log.i("kkkk","login :" +email+","+ password);
@@ -51,9 +56,11 @@ public class User{
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(USERTAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Log.i("kkkk","login:"+user.getEmail());
+                            //Log.d(USERTAG, "signInWithEmail:success");
+                            //Log.i("kkkk","login:"+user.getEmail());
+                            //userID=user.getEmail();
+
                             activity.startActivity(new Intent(activity,MainActivity.class));
                             accessibility=true;
                         } else {

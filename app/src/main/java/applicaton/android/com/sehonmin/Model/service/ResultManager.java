@@ -1,4 +1,4 @@
-package applicaton.android.com.sehonmin.db.service;
+package applicaton.android.com.sehonmin.Model.service;
 
 import android.util.Log;
 
@@ -11,15 +11,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
-import javax.xml.transform.Result;
-
-import applicaton.android.com.sehonmin.db.dao.FormDAO;
-import applicaton.android.com.sehonmin.db.dao.ResultDAO;
-import applicaton.android.com.sehonmin.db.dto.FormDTO;
-import applicaton.android.com.sehonmin.db.dto.ResultDTO;
+import applicaton.android.com.sehonmin.Model.dao.ResultDAO;
+import applicaton.android.com.sehonmin.Model.dto.ResultDTO;
 
 /**
  * Created by ken13 on 2017-12-04.
@@ -57,7 +52,7 @@ public class ResultManager {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 try {
-                    Log.i("resultmanagers",dataSnapshot.toString());
+                    Log.i("result managers",dataSnapshot.toString());
 
                     JSONObject jo1 = new JSONObject(dataSnapshot.getValue().toString());
                     int count = jo1.names().length();
@@ -91,30 +86,10 @@ public class ResultManager {
                             //Log.d("minkkk", "Value is: " +i+"   "+ja.names().getString(t));
                             formMap.put(ja.names().get(t).toString(), inDTO);
                         }
-
-
-
-
                     }
-
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
-              /*  Log.i("result count",String.valueOf(formMap.size()));
-                Iterator it=formMap.keySet().iterator();
-                while(it.hasNext()){
-                    Object key = it.next();
-                    Log.i("resultmanagers",formMap.get(key).getFormName());
-                }*/
-
-
-
-
-
             }
 
             @Override

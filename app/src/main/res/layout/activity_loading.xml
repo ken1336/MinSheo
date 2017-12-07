@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="applicaton.android.com.sehonmin.usermanagement.core.LoadingActivity">
+    tools:context="applicaton.android.com.sehonmin.LoadingActivity">
 
 </android.support.constraint.ConstraintLayout>

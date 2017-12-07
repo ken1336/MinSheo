@@ -1,9 +1,10 @@
-package applicaton.android.com.sehonmin.db.dao;
+package applicaton.android.com.sehonmin.Model.dao;
 
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import applicaton.android.com.sehonmin.db.dto.FormDTO;
+import applicaton.android.com.sehonmin.Model.dto.FormDTO;
+import applicaton.android.com.sehonmin.usermanagement.core.User;
 
 
 /**
@@ -20,7 +21,7 @@ public class FormDAO {
     private FormDAO(){
 
         database = FirebaseDatabase.getInstance();
-        ref=database.getReference("database").child("form");
+        ref=database.getReference("database").child(User.getUserID()).child("form");
 
     }
 
@@ -42,6 +43,9 @@ public class FormDAO {
     }
 
     public void submitData(FormDTO dto){
+        dto.put("StartDay",dto.getStartDay());
+        dto.put("EndtDay",dto.getEndDay());
+
         ref.child(dto.getFormName()).setValue(dto.getElements());
     }
 

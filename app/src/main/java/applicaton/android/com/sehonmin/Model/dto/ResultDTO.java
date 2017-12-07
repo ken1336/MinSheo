@@ -1,9 +1,8 @@
-package applicaton.android.com.sehonmin.db.dto;
+package applicaton.android.com.sehonmin.Model.dto;
 
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
 
 /**
  * Created by ken13 on 2017-12-04.

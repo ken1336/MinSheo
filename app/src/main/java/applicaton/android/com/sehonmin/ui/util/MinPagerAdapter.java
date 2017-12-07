@@ -1,48 +1,42 @@
 package applicaton.android.com.sehonmin.ui.util;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.ListFragment;
 
 import applicaton.android.com.sehonmin.data.util.PhoneBookManager;
 import applicaton.android.com.sehonmin.ui.core.FirstFragment;
-import applicaton.android.com.sehonmin.ui.core.SecondFragment;
-import applicaton.android.com.sehonmin.ui.core.ThirdFragment;
+import applicaton.android.com.sehonmin.ui.core.SecondListFragment;
+import applicaton.android.com.sehonmin.ui.core.ThirdListFragment;
 
 /**
  * Created by ken13 on 2017-12-02.
  * Modified by Park on 2017-12-03 19:28
  */
 
-public class MinPagerAdapter extends FragmentStatePagerAdapter {
-
-    public MinPagerAdapter(android.support.v4.app.FragmentManager fm) {
+public class MinPagerAdapter extends FragmentStatePagerAdapter
+{
+    public MinPagerAdapter(android.support.v4.app.FragmentManager fm)
+    {
         super(fm);
     }
-
     @Override
-    public ListFragment getItem(int position)
+    public android.support.v4.app.Fragment getItem(int position)
     {
-        ListFragment listFragment;
-        switch(position) {
+        switch(position)
+        {
             case 0:
-                listFragment =  new FirstFragment();
+                ListFragment listFragment =  new FirstFragment();
                 listFragment.setListAdapter(PhoneBookManager.getInstance().getPhoneNumberAdapter());
-                break;
+                return listFragment;
+
             case 1:
-                listFragment =  new SecondFragment();
-                //listFragment.setListAdapter(PhoneBookManager.getInstance().getPhoneNumberAdapter());
-                break;
+                return new SecondListFragment();
             case 2:
-                listFragment =  new ThirdFragment();
-                //listFragment.setListAdapter(PhoneBookManager.getInstance().getPhoneNumberAdapter());
-                break;
+                return new ThirdListFragment();
             default:
                 return null;
         }
-        return listFragment;
     }
-
     @Override
     public int getCount()
     {
