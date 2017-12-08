@@ -4,11 +4,6 @@ import android.database.Cursor;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 
-import java.util.List;
-
-import applicaton.android.com.sehonmin.Model.dto.PhoneBookDTO;
-import applicaton.android.com.sehonmin.data.util.PhoneBookManager;
-
 /**
  * Created by Park on 2017-12-07.
  */

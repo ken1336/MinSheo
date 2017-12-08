@@ -1,10 +1,8 @@
 package applicaton.android.com.sehonmin.ui.util;
 
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.ListFragment;
 
-import applicaton.android.com.sehonmin.data.util.PhoneBookManager;
-import applicaton.android.com.sehonmin.ui.core.FirstFragment;
+import applicaton.android.com.sehonmin.ui.core.FirstListFragment;
 import applicaton.android.com.sehonmin.ui.core.SecondListFragment;
 import applicaton.android.com.sehonmin.ui.core.ThirdListFragment;
 
@@ -25,10 +23,7 @@ public class MinPagerAdapter extends FragmentStatePagerAdapter
         switch(position)
         {
             case 0:
-                ListFragment listFragment =  new FirstFragment();
-                listFragment.setListAdapter(PhoneBookManager.getInstance().getPhoneNumberAdapter());
-                return listFragment;
-
+                return new FirstListFragment();
             case 1:
                 return new SecondListFragment();
             case 2:

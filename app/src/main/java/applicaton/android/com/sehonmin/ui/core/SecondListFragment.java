@@ -49,7 +49,6 @@ public class SecondListFragment extends Fragment implements View.OnClickListener
         rvContacts.setAdapter(adapter);
         rvContacts.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
     }
 
     @Override
