@@ -99,6 +99,12 @@ public class GroupManager implements Subject {
         groupDAO.getRef().child(groupName).child(userName).removeValue();
     }
 
+    public void removeGroup(String groupName){
+        groupHashMap.remove(groupName);
+        groupNameList.remove(groupName);
+        groupDAO.getRef().child(groupName).removeValue();
+    }
+
     public static GroupManager getInstance() {
         if (instance == null)
             instance = new GroupManager();

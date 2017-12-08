@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import applicaton.android.com.sehonmin.ui.util.recyclerview.FormListAdapter;
 import applicaton.android.com.sehonmin.ui.util.recyclerview.GroupAdapter;
 import applicaton.android.com.sehonmin.ui.util.recyclerview.PhoneBookAdapter;
 import applicaton.android.com.sehonmin.ui.util.recyclerview.itemdecoration.DividerItemDecoration;
+import applicaton.android.com.sehonmin.ui.util.recyclerview.itemdecoration.MarginItemDecoration;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,11 +42,15 @@ public class FirstListFragment extends Fragment implements View.OnClickListener{
 
         groupAdapter = new GroupAdapter();
 
-        rvContacts.addItemDecoration(
-                new DividerItemDecoration(getActivity().getDrawable(R.drawable.divider)));
+       /* rvContacts.addItemDecoration(
+                new DividerItemDecoration(getActivity().getDrawable(R.drawable.divider)));*/
         rvContacts.setAdapter(groupAdapter);
-        rvContacts.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        StaggeredGridLayoutManager gridLayoutManager =
+                new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        rvContacts.setLayoutManager(gridLayoutManager);
+        RecyclerView.ItemDecoration itemDecoration = new
+                MarginItemDecoration(20);
+        rvContacts.addItemDecoration(itemDecoration);
         createGroupButton.setOnClickListener(this);
 
     }
@@ -52,7 +58,6 @@ public class FirstListFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_first_list, container, false);
     }
 

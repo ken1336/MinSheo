@@ -37,7 +37,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
         mContext = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View contactView = inflater.inflate(R.layout.item_group_list, parent, false);
-        ViewHolder viewHolder = new ViewHolder(mContext, contactView);
+        ViewHolder viewHolder = new ViewHolder(mContext, contactView, this);
         return viewHolder;
     }
 
@@ -64,10 +64,12 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
         public RecyclerView recyclerView;
         private Context context;
         private GroupDTO groupDTO;
+        private  GroupAdapter groupAdapter;
 
         private boolean check = false;
-        public ViewHolder(Context context, View itemView) {
+        public ViewHolder(Context context, View itemView, GroupAdapter groupAdapter) {
             super(itemView);
+            this.groupAdapter = groupAdapter;
             this.context = context;
             nameTextView = (TextView) itemView.findViewById(R.id.group_name_tt);
             addGroupPersonBtn = (Button) itemView.findViewById(R.id.add_group_person_btn);
@@ -76,6 +78,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
 
             nameTextView.setOnClickListener(this);
             addGroupPersonBtn.setOnClickListener(this);
+            delGroupBtn.setOnClickListener(this);
             //addGroupPersonBtn.setOnClickListener(this);
 
         }
@@ -104,6 +107,8 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
                 }
             }  else if(view.equals(addGroupPersonBtn)){
                 show();
+            } else if(view.equals(delGroupBtn)){
+                show2();
             }
         }
 
@@ -125,6 +130,35 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
             final AlertDialog dialog = builder.create();
             mOkBtn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            mCancelBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+        }
+
+        public void show2(){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            LayoutInflater inflater = LayoutInflater.from(mContext);
+            View view = inflater.inflate(R.layout.del_group_dialog, null);
+
+            builder.setView(view);
+            final Button mOkBtn = (Button) view.findViewById(R.id.del_group_yes_btn);
+            final Button mCancelBtn=(Button) view.findViewById(R.id.del_group_no_btn);
+
+            final AlertDialog dialog = builder.create();
+            mOkBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    GroupManager.getInstance().removeGroup(nameTextView.getText().toString());
+                    groupAdapter.notifyDataSetChanged();
                     dialog.dismiss();
                 }
             });

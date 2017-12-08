@@ -1,33 +1,19 @@
 package applicaton.android.com.sehonmin;
 
-import android.app.FragmentManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 import applicaton.android.com.sehonmin.Model.service.FormManager;
-import applicaton.android.com.sehonmin.Model.service.GroupManager;
+
 import applicaton.android.com.sehonmin.Model.service.PhoneBookManager;
 import applicaton.android.com.sehonmin.Model.service.ResultManager;
 import applicaton.android.com.sehonmin.ui.util.MinPagerAdapter;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button first_fragment_btn;
-    private Button second_fragment_btn;
-    private Button third_fragment_btn;
-    private FragmentManager fragmentManager;
-    private ListView listView;
-    private ArrayList<Map<String, String>> dataList;
-    private SimpleAdapter adapter;
     private ViewPager viewPager;
 
     private TabLayout tabLayout;
@@ -36,19 +22,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("그룹");
         setContentView(R.layout.activity_main);
 
 
         PhoneBookManager.getInstance(this);
 
-        setViewPager();
+
         setOnclickListener();
         /*toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("tab1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.group_tab2));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.survey2));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.result));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -67,15 +54,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-
+        setViewPager();
 
     }
 
 
     public void setViewPager(){
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new MinPagerAdapter(getSupportFragmentManager()));
+        viewPager.setAdapter(new MinPagerAdapter(getSupportFragmentManager(),this));
         viewPager.setCurrentItem(0);
+        viewPager.getAdapter().notifyDataSetChanged();
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                switch(position){
+                    case 0:
+                        setTitle("그룹");
+                        break;
+                    case 1:
+                        setTitle("조사");
+                        break;
+                    case 2:
+                        setTitle("결과");
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     public void setOnclickListener() {
@@ -110,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         int tag = (int) view.getTag();
+
         viewPager.setCurrentItem(tag);
     }
 

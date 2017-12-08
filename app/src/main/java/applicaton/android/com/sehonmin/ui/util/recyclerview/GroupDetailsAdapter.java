@@ -91,7 +91,8 @@ public class GroupDetailsAdapter extends RecyclerView.Adapter<GroupDetailsAdapte
         @Override
         public void onClick(View view) {
             groupDTO.getGroupDTOHashMap().remove(groupDetailsNameView.getText().toString());
-            groupDetailsAdapter.notifyItemRemoved(getLayoutPosition());
+            groupDetailsAdapter.notifyDataSetChanged();
+            //groupDetailsAdapter.notifyItemRemoved(getLayoutPosition());
             GroupManager.getInstance().removeList(groupDTO.getName(), groupDetailsNameView.getText().toString());
         }
 
