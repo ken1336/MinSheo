@@ -18,10 +18,15 @@ public class PhoneBookManager {
     private static PhoneBookManager instance;
     private AppCompatActivity mainActivity;
     private PhoneBookDAO phoneBookDAO;
+    private List<PhoneBookDTO> phoneBookDTOList;
 
     private PhoneBookManager(AppCompatActivity appCompatActivity){
         mainActivity = appCompatActivity;
         phoneBookDAO = PhoneBookDAO.getInstance(appCompatActivity);
+    }
+
+    public AppCompatActivity getMainActivity() {
+        return mainActivity;
     }
 
     public static PhoneBookManager getInstance(){
@@ -36,35 +41,37 @@ public class PhoneBookManager {
     }
 
     public List<PhoneBookDTO> getPhoneBookList(){
-        List<PhoneBookDTO> phoneBookDTOList = new ArrayList<PhoneBookDTO>();
-        Cursor idAndNameCursor = phoneBookDAO.getPhoneBookIdAndNameCursor();
-        while (idAndNameCursor.moveToNext()) {
-            PhoneBookDTO phoneBookDTO = new PhoneBookDTO();
-            String id;
-            String name;
-            String number = null;
-            // 연락처 id 값
-            id = idAndNameCursor.getString(idAndNameCursor.getColumnIndex(ContactsContract.Contacts._ID));
-            // 연락처 대표 이름
-            name = idAndNameCursor.getString(idAndNameCursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME_PRIMARY));
+        if(phoneBookDTOList == null) {
+            phoneBookDTOList = new ArrayList<PhoneBookDTO>();
+            Cursor idAndNameCursor = phoneBookDAO.getPhoneBookIdAndNameCursor();
+            while (idAndNameCursor.moveToNext()) {
+                PhoneBookDTO phoneBookDTO = new PhoneBookDTO();
+                String id;
+                String name;
+                String number = null;
+                // 연락처 id 값
+                id = idAndNameCursor.getString(idAndNameCursor.getColumnIndex(ContactsContract.Contacts._ID));
+                // 연락처 대표 이름
+                name = idAndNameCursor.getString(idAndNameCursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME_PRIMARY));
 
-            Cursor phoneNumberCursor = phoneBookDAO.getPhoneNumberCursor(id);
+                Cursor phoneNumberCursor = phoneBookDAO.getPhoneNumberCursor(id);
 
-            if (phoneNumberCursor.moveToFirst()) {
-                number = phoneNumberCursor.getString(phoneNumberCursor.getColumnIndex(
-                        ContactsContract.CommonDataKinds.Phone.NUMBER));
+                if (phoneNumberCursor.moveToFirst()) {
+                    number = phoneNumberCursor.getString(phoneNumberCursor.getColumnIndex(
+                            ContactsContract.CommonDataKinds.Phone.NUMBER));
+                }
+
+                phoneBookDTO.setId(id);
+                phoneBookDTO.setName(name);
+                phoneBookDTO.setNumber(number);
+
+                phoneBookDTOList.add(phoneBookDTO);
+
+                phoneNumberCursor.close();
             }
 
-            phoneBookDTO.setId(id);
-            phoneBookDTO.setName(name);
-            phoneBookDTO.setNumber(number);
-
-            phoneBookDTOList.add(phoneBookDTO);
-
-            phoneNumberCursor.close();
+            idAndNameCursor.close();
         }
-
-        idAndNameCursor.close();
 
         return phoneBookDTOList;
     }
