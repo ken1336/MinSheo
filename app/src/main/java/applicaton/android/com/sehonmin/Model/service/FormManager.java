@@ -69,9 +69,20 @@ public class FormManager implements Subject{
                         JSONObject ja = new JSONObject(str);
                         FormDTO inDTO = new FormDTO(jo1.names().get(i).toString());
                         int countj = ja.names().length();
-                        for (int t = 0; t < countj; t++)
+                        for (int t = 0; t < countj; t++) {
+                            if(ja.names().get(t).toString().equals("GroupID")){
+                                inDTO.setGroupID(ja.get(ja.names().get(t).toString()).toString());
+                            }else if(ja.names().get(t).toString().equals("EndDay")){
+                                inDTO.setEndDay(ja.get(ja.names().get(t).toString()).toString());
+                            }else if(ja.names().get(t).toString().equals("StartDay")){
+                                inDTO.setStartDay(ja.get(ja.names().get(t).toString()).toString());
+                            }else if(ja.names().get(t).toString().equals("comment")){
+                                inDTO.setComment(ja.get(ja.names().get(t).toString()).toString());
+                            }else
                             inDTO.put(ja.names().getString(t), ja.get(ja.names().getString(t)));
+                        }
                         formMap.put(jo1.names().get(i).toString(), inDTO);
+
 
                     }
                     notifyObservers();

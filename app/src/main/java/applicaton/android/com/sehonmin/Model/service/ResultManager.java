@@ -19,6 +19,7 @@ import java.util.Map;
 import applicaton.android.com.sehonmin.Model.dao.ResultDAO;
 import applicaton.android.com.sehonmin.Model.dto.FormDTO;
 import applicaton.android.com.sehonmin.Model.dto.ResultDTO;
+import applicaton.android.com.sehonmin.Model.dto.ResultList;
 import applicaton.android.com.sehonmin.observer.Subject;
 import applicaton.android.com.sehonmin.observer.observer;
 
@@ -34,7 +35,8 @@ public class ResultManager implements Subject {
     private int field_num;
     public boolean ready=false;
 
-    private Map<String , ResultDTO> map;
+    private Map<String , ResultList> map;
+
     public static ResultManager instance;
     public static ResultManager getInstance(){
         if(instance==null)
@@ -43,7 +45,8 @@ public class ResultManager implements Subject {
     }
     private ResultManager(){
 
-        map=new HashMap<String, ResultDTO>();
+        map=new HashMap<String, ResultList>();
+
 
         dao=ResultDAO.getInstance();
 
@@ -60,56 +63,40 @@ public class ResultManager implements Subject {
                     notifyObservers();
                     return;
                 }
-                //Log.i("kkkkk","dididi");
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
                 try {
-                    Log.i("result managers",dataSnapshot.toString());
-
                     JSONObject jo1 = new JSONObject(dataSnapshot.getValue().toString());
-
                     int count = jo1.names().length();
-
                     for (int i = 0; i < count; i++) {
 
-                        //Log.d("minkkk", "num   "+jo1.names().get(0).toString());
-                        //Log.d("minkkk", "num   "+jo1.names().get(1).toString());
-                        //Log.d("minkkk", "num   "+jo1.names().get(2).toString());
                         String formName=jo1.names().get(0).toString();
-                        ResultDTO dto=new ResultDTO(formName);
                         String str = jo1.get(jo1.names().get(i).toString()).toString();
                         JSONObject ja = new JSONObject(str);
-                        int countt=ja.names().length();
-                        for(int f=0;f<countt;f++){
-                            dto.put(ja.names().get(f).toString(),ja.get(ja.names().get(f).toString()).toString());
-                        }
-                        map.put(formName, dto);
-
-                        //dto.put(ja.names().get(i).toString(),ja.get(ja.names().get(i).toString()).toString());
-                        Log.d("resultmanagers", ja.toString());
-
-
-
-
-                        /*int countj = ja.names().length();
-
-                        for (int t = 0; t < countj; t++) {
-                            String str2 = ja.get(ja.names().get(t).toString()).toString();
-                            Log.d("resultmin", "count: "+ str2);
-                            JSONObject ja2 = new JSONObject(str2);
-                            int count2=ja2.names().length();
-                            Log.d("resultmanagers", "name: "+ ja.names().get(t).toString());
-                            ResultDTO inDTO = new ResultDTO(ja.names().get(t).toString());
-                            for(int c2=0;c2<count2;c2++){
-                                Log.d("resultmanagers", "key: "+ ja2.names().getString(c2)+","+ja2.get(ja2.names().getString(c2)));
-                                inDTO.put(ja2.names().getString(c2), ja2.get(ja2.names().getString(c2)));
+                        ResultList list=new ResultList(jo1.names().get(i).toString());
+                        int count2=ja.names().length();
+                        for(int k=0;k<count2;k++){
+                            ResultDTO dto=new ResultDTO(ja.names().get(k).toString());
+                            String str2=ja.get(ja.names().get(k).toString()).toString();
+                            JSONObject ja2=new JSONObject(str2);
+                            int ja2Size=ja2.length();
+                            for(int t=0;t<ja2Size;t++){
+                                dto.put(ja2.names().get(t).toString(),ja2.get(ja2.names().get(t).toString()).toString());
                             }
-                            map.put(ja.names().get(t).toString(), inDTO);
-                        }*/
+                            list.put(dto);
+                            FormManager fm=FormManager.getInstance();
+                            String startDay=fm.getForm(list.getFormName()).getStartDay();
+                            String endDay=fm.getForm(list.getFormName()).getEndDay();
+                            String groupID=fm.getForm(list.getFormName()).getGroupID();
+                            list.setEndDay(endDay);
+                            list.setStartDay(startDay);
+                            list.setGroupID(groupID);
+
+                        }
+                        map.put(formName,list);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
             }
 
             @Override
@@ -126,7 +113,7 @@ public class ResultManager implements Subject {
 
     }
 
-    public ResultDTO getForm(String form_name){
+    public ResultList getForm(String form_name){
         return map.get(form_name);
     }
 
@@ -154,13 +141,13 @@ public class ResultManager implements Subject {
     }
 */
    public List getItemList(){
-       List<ResultDTO> list=new ArrayList<>();
+       List<ResultList> list=new ArrayList<>();
 
        Iterator it=map.keySet().iterator();
        while(it.hasNext()) {
            Object key = it.next();
 
-           ResultDTO d=map.get(key);
+           ResultList d=map.get(key);
            list.add(d);
 
        }
