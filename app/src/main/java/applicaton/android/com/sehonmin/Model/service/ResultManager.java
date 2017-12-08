@@ -64,16 +64,18 @@ public class ResultManager implements Subject {
                     return;
                 }
                 try {
+                    Log.i("result managers","rm roading");
                     JSONObject jo1 = new JSONObject(dataSnapshot.getValue().toString());
                     int count = jo1.names().length();
                     for (int i = 0; i < count; i++) {
-
+                        Log.i("result managers","dataSnapshot.getValue().toString()");
                         String formName=jo1.names().get(0).toString();
                         String str = jo1.get(jo1.names().get(i).toString()).toString();
                         JSONObject ja = new JSONObject(str);
                         ResultList list=new ResultList(jo1.names().get(i).toString());
                         int count2=ja.names().length();
                         for(int k=0;k<count2;k++){
+                            Log.i("result managers","ja");
                             ResultDTO dto=new ResultDTO(ja.names().get(k).toString());
                             String str2=ja.get(ja.names().get(k).toString()).toString();
                             JSONObject ja2=new JSONObject(str2);
@@ -89,10 +91,11 @@ public class ResultManager implements Subject {
                             list.setEndDay(endDay);
                             list.setStartDay(startDay);
                             list.setGroupID(groupID);
-
+                            Log.i("result managers","ja");
                         }
                         map.put(formName,list);
                     }
+                    notifyObservers();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -123,6 +126,8 @@ public class ResultManager implements Subject {
 
     @Override
     public void notifyObservers() {
+
+        Log.i("ssts","rm on");
         ob.onCompleteLoad();
     }
     public void setObserver(observer ob){

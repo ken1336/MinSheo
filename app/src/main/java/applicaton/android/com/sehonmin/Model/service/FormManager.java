@@ -139,6 +139,7 @@ public class FormManager implements Subject{
     @Override
     public void notifyObservers() {
 
+        Log.i("ssts","fm on");
         ob.onCompleteLoad();
     }
 
