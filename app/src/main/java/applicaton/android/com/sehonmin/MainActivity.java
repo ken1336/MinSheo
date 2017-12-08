@@ -11,14 +11,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-
 import java.util.ArrayList;
 import java.util.Map;
 
-import applicaton.android.com.sehonmin.data.util.PhoneBookManager;
 import applicaton.android.com.sehonmin.Model.service.FormManager;
+import applicaton.android.com.sehonmin.Model.service.GroupManager;
+import applicaton.android.com.sehonmin.Model.service.PhoneBookManager;
 import applicaton.android.com.sehonmin.Model.service.ResultManager;
-import applicaton.android.com.sehonmin.ui.core.FirstFragment;
 import applicaton.android.com.sehonmin.ui.util.MinPagerAdapter;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -26,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button second_fragment_btn;
     private Button third_fragment_btn;
     private FragmentManager fragmentManager;
-    private FirstFragment ft;
     private ListView listView;
     private ArrayList<Map<String, String>> dataList;
     private SimpleAdapter adapter;
@@ -42,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         PhoneBookManager.getInstance(this);
+
         setViewPager();
         setOnclickListener();
         /*toolbar = (Toolbar) findViewById(R.id.toolbar);
