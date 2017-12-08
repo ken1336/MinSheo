@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.sax.StartElementListener;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,8 +35,9 @@ public class FormCreationActivity extends AppCompatActivity {
     private Context context;
     private RecyclerView rv;
     private Button mSubmitBtn;
-    private Button mStartBtn;
-    private Button mEndBtn;
+    private FloatingActionButton mStartBtn;
+    private  FloatingActionButton mEndBtn;
+    private Button mGroupIDBtn;
     private FormCreateAdapter adapter;
     private FormManager fm;
     private FormDTO dto;
@@ -61,6 +63,7 @@ public class FormCreationActivity extends AppCompatActivity {
 
 
         adapter = new FormCreateAdapter(dto);
+        Log.i("sssss", String.valueOf(dto.getElements().size()));
         adapter.notifyDataSetChanged();
         adapter.setItemClick(itemClickListener());
 
@@ -71,11 +74,13 @@ public class FormCreationActivity extends AppCompatActivity {
 
         mSubmitBtn=(Button)findViewById(R.id.submit_form_btn);
         mSubmitBtn.setOnClickListener(submitListener());
-        mStartBtn=(Button)findViewById(R.id.btn_form_start_date);
-        mEndBtn=(Button)findViewById(R.id.btn_form_end_date);
+        mStartBtn=( FloatingActionButton)findViewById(R.id.btn_form_start_date);
+        mEndBtn=( FloatingActionButton)findViewById(R.id.btn_form_end_date);
         mStartBtn.setOnClickListener(startDateListener());
         mEndBtn.setOnClickListener(endDateListener());
-
+       /* mGroupIDBtn=(Button)findViewById(R.id.btn_form_set_groupid);
+        mGroupIDBtn.setOnClickListener(setGroupIDListener());
+*/
         
 
 
@@ -167,6 +172,11 @@ public class FormCreationActivity extends AppCompatActivity {
 
             }
         };
+        return listener;
+    }
+    public View.OnClickListener setGroupIDListener(){
+        View.OnClickListener listener=null;
+
         return listener;
     }
 

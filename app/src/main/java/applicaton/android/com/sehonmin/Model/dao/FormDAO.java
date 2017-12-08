@@ -48,6 +48,9 @@ public class FormDAO {
 
         ref.child(dto.getFormName()).setValue(dto.getElements());
     }
+    public void submitElementData(String key,FormDTO dto){
+        dto.getElements().get(key);
+    }
 
     public void deleteField(FormDTO dto){
         ref.child(dto.getFormName()).updateChildren(dto.getElements());

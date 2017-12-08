@@ -16,7 +16,7 @@
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".LoginActivity"
             android:theme="@style/LoginTheme" />
@@ -27,7 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FormCreationActivity"></activity>
+        <activity android:name=".FormCreationActivity" />
+        <activity android:name=".ResultActivity"></activity>
     </application>
 
 </manifest>

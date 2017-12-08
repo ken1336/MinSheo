@@ -26,6 +26,7 @@ public class FormDTO {
     private boolean activation;
     private String formName;
     private Map<String, Object> map;
+    private String groupID;
 
 
     public FormDTO(String formName){
@@ -35,6 +36,14 @@ public class FormDTO {
         map=new HashMap<>();
         this.formName=formName;
 
+    }
+
+    public String getGroupID() {
+        return groupID;
+    }
+
+    public void setGroupID(String groupID) {
+        this.groupID = groupID;
     }
 
     public String getStartDay() {

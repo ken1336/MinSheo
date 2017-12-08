@@ -10,20 +10,30 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/form_element_list"
         android:scrollbars="vertical"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="8"
+        android:layout_weight="20"
         />
 
-    <Button
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_form_start_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="5dp"
         android:layout_weight="1"
-        android:text="select start date"
-        android:id="@+id/btn_form_start_date"/>
 
-    <Button
+        android:src="@drawable/cal"
+        android:text="select start date"
+        app:backgroundTint="@color/date_set_btn_color"
+        app:fabSize="auto" />
+
+    <android.support.design.widget.FloatingActionButton
+
+        android:src="@drawable/cal"
+        app:backgroundTint="@color/date_set_btn_color"
+        android:layout_margin="5dp"
+        android:layout_gravity="right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
