@@ -29,6 +29,7 @@ import applicaton.android.com.sehonmin.usermanagement.core.User;
 
 public class FormManager implements Subject{
 
+
     public observer ob;
     private FormDAO dao;
     private DatabaseReference myRef;

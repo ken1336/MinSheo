@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import applicaton.android.com.sehonmin.Model.dto.FormDTO;
 import applicaton.android.com.sehonmin.R;
 import applicaton.android.com.sehonmin.ui.util.recyclerview.FormCreateAdapter;
 

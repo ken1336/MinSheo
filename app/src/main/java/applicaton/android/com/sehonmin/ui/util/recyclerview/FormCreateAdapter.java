@@ -76,7 +76,7 @@ public class FormCreateAdapter extends RecyclerView.Adapter<FormCreateAdapter.Vi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(itemClick != null){
+                    if(itemClick != null){
                     itemClick.onClick(v, Position);
                 }
             }

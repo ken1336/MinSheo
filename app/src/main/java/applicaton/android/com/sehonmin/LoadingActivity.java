@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import applicaton.android.com.sehonmin.Model.service.FormManager;
+import applicaton.android.com.sehonmin.Model.service.ResultManager;
 import applicaton.android.com.sehonmin.observer.observer;
 
 public class LoadingActivity extends AppCompatActivity implements observer {
@@ -21,6 +22,8 @@ public class LoadingActivity extends AppCompatActivity implements observer {
             @Override
             public void run() {
                 FormManager fm= FormManager.getInstance();
+                ResultManager rm= ResultManager.getInstance();
+                rm.setObserver(LoadingActivity.getContext());
                 fm.setObserver(LoadingActivity.getContext());
             }
         }).start();
