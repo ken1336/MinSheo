@@ -76,9 +76,6 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
             holder=this;
             this.context = context;
 
-
-
-
         }
 
         @Override
@@ -104,6 +101,5 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
             }
         }
     }
-
 
 }
