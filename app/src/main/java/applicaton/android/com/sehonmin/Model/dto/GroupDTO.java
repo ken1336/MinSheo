@@ -3,6 +3,7 @@ package applicaton.android.com.sehonmin.Model.dto;
 import android.util.ArrayMap;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,27 +13,27 @@ import java.util.Map;
 
 public class GroupDTO {
 
-    private String groupID;
-    private List list;
+    private String name;
+    private HashMap<String, String> groupDTOHashMap;
 
-    public GroupDTO(String groupID){
-        this.groupID=groupID;
-        list=new ArrayList();
+    public GroupDTO(String name){
+        this.name=name;
+        groupDTOHashMap = new HashMap<String,String>();
     }
 
-    public List getMap() {
-        return list;
+    public HashMap<String, String> getGroupDTOHashMap() {
+        return groupDTOHashMap;
     }
 
-    public void setMap(List list) {
-        this.list = list;
+    public void setGroupDTOHashMap(HashMap<String, String> groupDTOHashMap) {
+        this.groupDTOHashMap = groupDTOHashMap;
     }
 
-    public String getGroupID() {
-        return groupID;
+    public String getName() {
+        return name;
     }
 
-    public void setGroupID(String groupID) {
-        this.groupID = groupID;
+    public void setName(String name) {
+        this.name = name;
     }
 }

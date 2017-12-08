@@ -20,7 +20,6 @@ import applicaton.android.com.sehonmin.R;
  */
 
 public class FormCreateAdapter extends RecyclerView.Adapter<FormCreateAdapter.ViewHolder>  {
-
     private FormDTO contents;
     private List<String[]> list;
     private Context context;
@@ -33,9 +32,6 @@ public class FormCreateAdapter extends RecyclerView.Adapter<FormCreateAdapter.Vi
     public void setItemClick(ItemClick itemClick) {
         this.itemClick = itemClick;
     }
-
-
-
 
     public FormCreateAdapter(FormDTO dto){
         contents= dto;

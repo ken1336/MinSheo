@@ -6,7 +6,7 @@
       <!--  <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>-->
-        <item name="colorPrimary">#4682b4</item>
+        <item name="colorPrimary">#523738</item>
         <!--   darker variant for the status bar and contextual app bars -->
         <item name="colorPrimaryDark">#303F9F</item>
         <!--   theme UI controls like checkboxes and text fields -->
@@ -23,6 +23,10 @@
 
     <style name="LoginTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">@drawable/start_up</item>
+    </style>
+
+    <style name="ButtonTheme" parent="@style/Widget.AppCompat.Button.Colored">
+        <item name="android:colorBackground">#AABBCC</item>
     </style>
 
 </resources>

@@ -5,13 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.security.acl.Group;
+
 import applicaton.android.com.sehonmin.Model.service.FormManager;
+import applicaton.android.com.sehonmin.Model.service.GroupManager;
 import applicaton.android.com.sehonmin.Model.service.ResultManager;
 import applicaton.android.com.sehonmin.observer.observer;
 
 public class LoadingActivity extends AppCompatActivity implements observer {
 
-
+    private int ready = 3;
     private static observer ob;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +26,10 @@ public class LoadingActivity extends AppCompatActivity implements observer {
             public void run() {
                 FormManager fm= FormManager.getInstance();
                 ResultManager rm= ResultManager.getInstance();
+                GroupManager gm = GroupManager.getInstance();
                 rm.setObserver(LoadingActivity.getContext());
                 fm.setObserver(LoadingActivity.getContext());
+                gm.setObserver(LoadingActivity.getContext());
             }
         }).start();
 
@@ -40,9 +45,10 @@ public class LoadingActivity extends AppCompatActivity implements observer {
 
     @Override
     public void onCompleteLoad() {
-
-
-        Intent intent=new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
+        ready--;
+        if(ready == 0) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
     }
 }

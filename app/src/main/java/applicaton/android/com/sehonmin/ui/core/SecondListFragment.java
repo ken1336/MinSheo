@@ -39,6 +39,7 @@ public class SecondListFragment extends Fragment implements View.OnClickListener
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         mCreateBtn=(Button)getActivity().findViewById(R.id.create_form_btn);
         mCreateBtn.setOnClickListener(this);
 
@@ -48,7 +49,6 @@ public class SecondListFragment extends Fragment implements View.OnClickListener
         rvContacts = (RecyclerView) getActivity().findViewById(R.id.recycler_view);
         rvContacts.setAdapter(adapter);
         rvContacts.setLayoutManager(new LinearLayoutManager(getActivity()));
-
 
     }
 

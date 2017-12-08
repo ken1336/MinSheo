@@ -19,10 +19,8 @@ public class FormDAO {
     private DatabaseReference ref;
 
     private FormDAO(){
-
         database = FirebaseDatabase.getInstance();
         ref=database.getReference("database").child(User.getUserID()).child("form");
-
     }
 
     public static FormDAO getInstance(){
