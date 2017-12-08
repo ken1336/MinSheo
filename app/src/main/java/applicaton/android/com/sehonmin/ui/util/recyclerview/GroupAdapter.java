@@ -28,7 +28,8 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
     private static Context mContext;
 
     public GroupAdapter() {
-        groupNameList = GroupManager.getInstance().getGroupNameList();
+        GroupManager groupManager = GroupManager.getInstance();
+        groupNameList = groupManager.getGroupNameList();
     }
 
     @Override

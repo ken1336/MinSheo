@@ -110,6 +110,7 @@ public class ResultManager implements Subject {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                notifyObservers();
             }
 
             @Override
