@@ -25,9 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setTitle("그룹");
         setContentView(R.layout.activity_main);
 
-
         PhoneBookManager.getInstance(this);
-
 
         setOnclickListener();
         /*toolbar = (Toolbar) findViewById(R.id.toolbar);
