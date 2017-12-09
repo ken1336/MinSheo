@@ -31,7 +31,6 @@ import applicaton.android.com.sehonmin.ui.util.recyclerview.FormCreateAdapter;
 import applicaton.android.com.sehonmin.ui.util.recyclerview.FormListAdapter;
 
 public class FormCreationActivity extends AppCompatActivity {
-
     private Context context;
     private RecyclerView rv;
     private Button mSubmitBtn;
