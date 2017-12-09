@@ -12,12 +12,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import applicaton.android.com.sehonmin.Model.dto.GroupDTO;
+import applicaton.android.com.sehonmin.Model.dto.PhoneBookDTO;
 import applicaton.android.com.sehonmin.Model.service.GroupManager;
 import applicaton.android.com.sehonmin.Model.service.PhoneBookManager;
 import applicaton.android.com.sehonmin.R;
+import applicaton.android.com.sehonmin.ui.util.recyclerview.itemdecoration.RecyclerItemClickListener;
 
 /**
  * Created by Park on 2017-12-08.
@@ -57,20 +60,25 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
         return groupNameList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView nameTextView;
         public Button addGroupPersonBtn;
         public Button delGroupBtn;
         public RecyclerView recyclerView;
         private Context context;
         private GroupDTO groupDTO;
-        private  GroupAdapter groupAdapter;
+        private GroupAdapter groupAdapter;
+        private PhoneBookAdapter phoneBookAdapter;
+        private ArrayList<PhoneBookDTO> phoneBookDTOArrayList;
 
         private boolean check = false;
+
         public ViewHolder(Context context, View itemView, GroupAdapter groupAdapter) {
             super(itemView);
             this.groupAdapter = groupAdapter;
             this.context = context;
+            phoneBookDTOArrayList = new ArrayList<PhoneBookDTO>();
+            phoneBookDTOArrayList.clear();
             nameTextView = (TextView) itemView.findViewById(R.id.group_name_tt);
             addGroupPersonBtn = (Button) itemView.findViewById(R.id.add_group_person_btn);
             delGroupBtn = (Button) itemView.findViewById(R.id.del_group_btn);
@@ -101,18 +109,18 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
                     recyclerView.setVisibility(View.VISIBLE);
 
                     check = true;
-                } else{
+                } else {
                     recyclerView.setVisibility(View.GONE);
                     check = false;
                 }
-            }  else if(view.equals(addGroupPersonBtn)){
+            } else if (view.equals(addGroupPersonBtn)) {
                 show();
-            } else if(view.equals(delGroupBtn)){
+            } else if (view.equals(delGroupBtn)) {
                 show2();
             }
         }
 
-        public void show(){
+        public void show() {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
             LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -120,22 +128,47 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
 
             builder.setView(view);
             final Button mOkBtn = (Button) view.findViewById(R.id.group_user_add_ok_btn);
-            final Button mCancelBtn=(Button) view.findViewById(R.id.group_user_add_cancel_btn);
+            final Button mCancelBtn = (Button) view.findViewById(R.id.group_user_add_cancel_btn);
             final RecyclerView phoneBook = (RecyclerView) view.findViewById(R.id.rv_add_user);
 
-            PhoneBookAdapter phoneBookAdapter = new PhoneBookAdapter();
+            phoneBookAdapter = new PhoneBookAdapter(phoneBookDTOArrayList);
+
             phoneBook.setAdapter(phoneBookAdapter);
             phoneBook.setLayoutManager(new LinearLayoutManager(mContext));
+            phoneBook.addOnItemTouchListener(
+                    new RecyclerItemClickListener(mContext, new RecyclerItemClickListener.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            try {
+                                phoneBookAdapter.setSelected(position);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    })
+            );
 
             final AlertDialog dialog = builder.create();
             mOkBtn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
+                    //phoneBookDTOArrayList.clear();
+                    if (phoneBookDTOArrayList.size() != 0) {
+                        GroupManager.getInstance().put(nameTextView.getText().toString(), phoneBookDTOArrayList);
+                        phoneBookDTOArrayList.clear();
+                    }
+                    phoneBookAdapter.notifyDataSetChanged();
                     dialog.dismiss();
                 }
             });
             mCancelBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    ArrayList<PhoneBookDTO> phoneBookDTOList = (ArrayList<PhoneBookDTO>)PhoneBookManager.getInstance().getPhoneBookList();
+                    int size = 0;
+                    for(int i = 0; i < size; i ++){
+                        phoneBookDTOList.get(i).setSelected(false);
+                    }
+                    phoneBookAdapter.notifyDataSetChanged();
                     dialog.dismiss();
                 }
             });
@@ -143,7 +176,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
             dialog.show();
         }
 
-        public void show2(){
+        public void show2() {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
             LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -151,7 +184,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
 
             builder.setView(view);
             final Button mOkBtn = (Button) view.findViewById(R.id.del_group_yes_btn);
-            final Button mCancelBtn=(Button) view.findViewById(R.id.del_group_no_btn);
+            final Button mCancelBtn = (Button) view.findViewById(R.id.del_group_no_btn);
 
             final AlertDialog dialog = builder.create();
             mOkBtn.setOnClickListener(new View.OnClickListener() {

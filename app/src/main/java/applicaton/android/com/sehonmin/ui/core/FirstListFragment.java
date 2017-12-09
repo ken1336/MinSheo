@@ -26,6 +26,7 @@ import applicaton.android.com.sehonmin.ui.util.recyclerview.GroupAdapter;
 import applicaton.android.com.sehonmin.ui.util.recyclerview.PhoneBookAdapter;
 import applicaton.android.com.sehonmin.ui.util.recyclerview.itemdecoration.DividerItemDecoration;
 import applicaton.android.com.sehonmin.ui.util.recyclerview.itemdecoration.MarginItemDecoration;
+import applicaton.android.com.sehonmin.ui.util.recyclerview.itemdecoration.RecyclerItemClickListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +45,7 @@ public class FirstListFragment extends Fragment implements View.OnClickListener{
 
        /* rvContacts.addItemDecoration(
                 new DividerItemDecoration(getActivity().getDrawable(R.drawable.divider)));*/
+       rvContacts.setHasFixedSize(true);
         rvContacts.setAdapter(groupAdapter);
         StaggeredGridLayoutManager gridLayoutManager =
                 new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
@@ -94,4 +96,5 @@ public class FirstListFragment extends Fragment implements View.OnClickListener{
 
         dialog.show();
     }
+
 }

@@ -64,6 +64,7 @@ public class PhoneBookManager {
                 phoneBookDTO.setId(id);
                 phoneBookDTO.setName(name);
                 phoneBookDTO.setNumber(number);
+                phoneBookDTO.setSelected(false);
 
                 phoneBookDTOList.add(phoneBookDTO);
 

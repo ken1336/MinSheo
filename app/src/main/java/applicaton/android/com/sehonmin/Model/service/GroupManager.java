@@ -95,6 +95,20 @@ public class GroupManager implements Subject {
         });
     }
 
+    public void put(String groupName, ArrayList<PhoneBookDTO> phoneBookDTOArrayList){
+        DatabaseReference groupRef = groupDAO.getRef().child(groupName);
+        HashMap<String, Object> inputData = new HashMap<String, Object>();
+        int size = phoneBookDTOArrayList.size();
+        for(int i = 0; i < size; i++){
+            PhoneBookDTO phoneBookDTO = phoneBookDTOArrayList.get(i);
+
+            inputData.put(phoneBookDTO.getName(),phoneBookDTO.getNumber());
+        }
+
+        groupRef.updateChildren(inputData);
+        phoneBookDTOArrayList.clear();
+    }
+
     public void removeList(String groupName, String userName ){
         groupDAO.getRef().child(groupName).child(userName).removeValue();
     }
