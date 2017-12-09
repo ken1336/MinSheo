@@ -23,18 +23,14 @@ import applicaton.android.com.sehonmin.ui.util.recyclerview.FormListAdapter;
  * A simple {@link Fragment} subclass.
  */
 public class SecondListFragment extends Fragment implements View.OnClickListener{
-
     private RecyclerView rvContacts;
     private Button mCreateBtn;
     private String formName;
     private View view;
 
-
-
     public SecondListFragment() {
 
     }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

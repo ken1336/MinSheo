@@ -70,7 +70,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
         private GroupAdapter groupAdapter;
         private PhoneBookAdapter phoneBookAdapter;
         private ArrayList<PhoneBookDTO> phoneBookDTOArrayList;
-
+        private GroupDetailsAdapter groupDetailsAdapter;
         private boolean check = false;
 
         public ViewHolder(Context context, View itemView, GroupAdapter groupAdapter) {
@@ -98,7 +98,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
                     if (groupDTO == null) {
                         groupDTO = GroupManager.getInstance().getGroupHashMap().get(GroupManager.getInstance().getGroupNameList().get(getLayoutPosition()));
 
-                        GroupDetailsAdapter groupDetailsAdapter = new GroupDetailsAdapter(groupDTO);
+                        groupDetailsAdapter = new GroupDetailsAdapter(groupDTO);
                         GroupManager.getInstance().setGroupDetailsAdapter(groupDetailsAdapter);
 
                         recyclerView.setAdapter(groupDetailsAdapter);
@@ -153,10 +153,12 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
                 public void onClick(View v) {
                     //phoneBookDTOArrayList.clear();
                     if (phoneBookDTOArrayList.size() != 0) {
+                        GroupManager.getInstance().setGroupDetailsAdapter(groupDetailsAdapter);
                         GroupManager.getInstance().put(nameTextView.getText().toString(), phoneBookDTOArrayList);
                         phoneBookDTOArrayList.clear();
                     }
-                    phoneBookAdapter.notifyDataSetChanged();
+                    //phoneBookAdapter.notifyDataSetChanged();
+                    //groupDetailsAdapter.notifyDataSetChanged();
                     dialog.dismiss();
                 }
             });

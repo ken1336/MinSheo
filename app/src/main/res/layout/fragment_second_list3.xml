@@ -10,17 +10,24 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_weight="16"
-        />
+        android:scrollbars="vertical" />
 
     <Button
-        android:layout_gravity="bottom"
         android:id="@+id/create_form_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="0dp"
         android:layout_weight="1"
-        android:text="create form"/>
+        android:background="@drawable/button"
+        android:text="수요조사 만들기" />
 </LinearLayout>
