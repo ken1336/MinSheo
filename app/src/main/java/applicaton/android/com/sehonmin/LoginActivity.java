@@ -14,11 +14,11 @@ import applicaton.android.com.sehonmin.usermanagement.core.User;
  */
 
 public class LoginActivity extends Activity {
-
     private User user;
     private EditText idText;
     private EditText pwText;
     private ImageButton lgBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
