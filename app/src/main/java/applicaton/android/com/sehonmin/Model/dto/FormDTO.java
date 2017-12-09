@@ -27,7 +27,15 @@ public class FormDTO {
     private String formName;
     private Map<String, Object> map;
     private String groupID;
+    private String comment;
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
     public FormDTO(String formName){
 

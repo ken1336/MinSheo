@@ -125,6 +125,8 @@ public class GroupManager implements Subject {
 
     @Override
     public void notifyObservers() {
+
+        Log.i("ssts","gm on");
         ob.onCompleteLoad();
     }
 

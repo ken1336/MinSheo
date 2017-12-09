@@ -42,7 +42,7 @@ public class FormDAO {
 
     public void submitData(FormDTO dto){
         dto.put("StartDay",dto.getStartDay());
-        dto.put("EndtDay",dto.getEndDay());
+        dto.put("EndDay",dto.getEndDay());
 
         ref.child(dto.getFormName()).setValue(dto.getElements());
     }

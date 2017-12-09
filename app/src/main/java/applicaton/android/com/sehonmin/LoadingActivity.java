@@ -46,7 +46,9 @@ public class LoadingActivity extends AppCompatActivity implements observer {
     @Override
     public void onCompleteLoad() {
         ready--;
+
         if(ready == 0) {
+            Log.i("ssts","start!");
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }

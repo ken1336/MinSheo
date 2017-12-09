@@ -15,6 +15,7 @@ import java.util.List;
 
 import applicaton.android.com.sehonmin.Model.dto.FormDTO;
 import applicaton.android.com.sehonmin.Model.dto.ResultDTO;
+import applicaton.android.com.sehonmin.Model.dto.ResultList;
 import applicaton.android.com.sehonmin.Model.service.FormManager;
 import applicaton.android.com.sehonmin.Model.service.ResultManager;
 import applicaton.android.com.sehonmin.R;
@@ -26,9 +27,9 @@ import applicaton.android.com.sehonmin.ResultActivity;
 
 public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.ViewHolder>  {
 
-    private List<ResultDTO> list;
+    private List<ResultList> list;
 
-    private ResultDTO dto;
+    private ResultList dto;
     public ResultListAdapter(){
         list= ResultManager.getInstance().getItemList();
     }
