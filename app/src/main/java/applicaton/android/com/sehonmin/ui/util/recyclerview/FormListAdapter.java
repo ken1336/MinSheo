@@ -99,6 +99,7 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
                             ArrayList<String> groupPersonNameList = new ArrayList<String>(groupDTO.getGroupDTOHashMap().keySet());
                             HashMap<String, String> groupNamePhoneNumHashMap = groupDTO.getGroupDTOHashMap();
                             String message = "https://sehonmin.firebaseapp.com/"+ User.getUserID() + "&" + formDTO.getName();
+                            message = message.replace(" ","%20");
                             formNameTextView.setText(message);
                             /*for(String name : groupPersonNameList){
                                 smsManager.sendTextMessage(groupNamePhoneNumHashMap.get(name), null, message, null, null);
