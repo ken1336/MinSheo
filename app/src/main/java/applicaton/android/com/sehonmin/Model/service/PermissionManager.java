@@ -33,7 +33,7 @@ public class PermissionManager {
         return instance;
     }
 
-    private void requestPermission(final String permission){ //Manifest.permission.READ_CONTACTS
+    public void requestPermission(final String permission){ //Manifest.permission.READ_CONTACTS
         int permissionResult = mainActivity.checkSelfPermission(permission);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 

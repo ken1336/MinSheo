@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +15,18 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import applicaton.android.com.sehonmin.Model.dto.FormDTO;
+import applicaton.android.com.sehonmin.Model.dto.GroupDTO;
 import applicaton.android.com.sehonmin.Model.service.FormManager;
 import applicaton.android.com.sehonmin.Model.service.GroupManager;
 import applicaton.android.com.sehonmin.R;
+import applicaton.android.com.sehonmin.usermanagement.core.User;
 
 public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHolder>  {
     private List<FormDTO> formDTOList;
@@ -55,6 +61,7 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView formNameTextView;
+        public Button sendGroupMsgButton;
         public Button delFormButton;
         public RecyclerView formInfoRecyclerView;
         private FormDTO formDTO;
@@ -65,7 +72,52 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
 
             formNameTextView = itemView.findViewById(R.id.form_name_tt);
             delFormButton = itemView.findViewById(R.id.del_form_btn);
+            sendGroupMsgButton = itemView.findViewById(R.id.send_group_msg_btn);
             formInfoRecyclerView = itemView.findViewById(R.id.rv_form_info);
+
+            sendGroupMsgButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view2) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    LayoutInflater inflater = LayoutInflater.from(context);
+                    View view = inflater.inflate(R.layout.send_msg_dialog, null);
+
+                    builder.setView(view);
+                    final Button mOkBtn = (Button) view.findViewById(R.id.send_group_yes_btn);
+                    final Button mCancelBtn = (Button) view.findViewById(R.id.send_group_no_btn);
+
+                    final AlertDialog dialog = builder.create();
+                    mOkBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            FormDTO formDTO = formDTOList.get(getLayoutPosition());
+
+
+                            GroupDTO groupDTO = GroupManager.getInstance().getGroupHashMap().get(formDTO.getGroupID());
+
+                            SmsManager smsManager = SmsManager.getDefault();
+                            ArrayList<String> groupPersonNameList = new ArrayList<String>(groupDTO.getGroupDTOHashMap().keySet());
+                            HashMap<String, String> groupNamePhoneNumHashMap = groupDTO.getGroupDTOHashMap();
+                            String message = "https://sehonmin.firebaseapp.com/"+ User.getUserID() + "&" + formDTO.getName();
+                            formNameTextView.setText(message);
+                            /*for(String name : groupPersonNameList){
+                                smsManager.sendTextMessage(groupNamePhoneNumHashMap.get(name), null, message, null, null);
+                            }*/
+
+                            dialog.dismiss();
+                        }
+                    });
+                    mCancelBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    dialog.show();
+
+                }
+            });
 
             delFormButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,7 +136,7 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
                         public void onClick(View v) {
                             FormDTO formDTO = formDTOList.get(getLayoutPosition());
                             FormManager.getInstance().deleteForm(formDTO);
-                            //notifyDataSetChanged();
+
                             dialog.dismiss();
                         }
                     });
@@ -107,7 +159,7 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
         public void onClick(View view) {
             if(!check){
                 if(formDTO == null){
-                    formDTO = ((ArrayList<FormDTO>)FormManager.getInstance().getItemList()).get(getLayoutPosition());
+                    FormDTO formDTO = formDTOList.get(getLayoutPosition());
 
                     FormDetailAdapter formDetailAdapter = new FormDetailAdapter(formDTO);
 

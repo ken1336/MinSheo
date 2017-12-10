@@ -1,5 +1,6 @@
 package applicaton.android.com.sehonmin.Model.service;
 
+import android.Manifest;
 import android.database.Cursor;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ public class PhoneBookManager {
     private PhoneBookManager(AppCompatActivity appCompatActivity){
         mainActivity = appCompatActivity;
         phoneBookDAO = PhoneBookDAO.getInstance(appCompatActivity);
+        //PermissionManager.getInstance().requestPermission(Manifest.permission.READ_CONTACTS);
     }
 
     public AppCompatActivity getMainActivity() {

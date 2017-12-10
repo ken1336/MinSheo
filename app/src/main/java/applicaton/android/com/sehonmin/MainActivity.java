@@ -1,5 +1,6 @@
 package applicaton.android.com.sehonmin;
 
+import android.Manifest;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.view.View;
 
 import applicaton.android.com.sehonmin.Model.service.FormManager;
 
+import applicaton.android.com.sehonmin.Model.service.PermissionManager;
 import applicaton.android.com.sehonmin.Model.service.PhoneBookManager;
 import applicaton.android.com.sehonmin.Model.service.ResultManager;
 import applicaton.android.com.sehonmin.ui.util.MinPagerAdapter;
@@ -22,6 +24,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PermissionManager permissionManager = PermissionManager.getInstance(this);
+        permissionManager.requestPermission(Manifest.permission.READ_CONTACTS);
+        permissionManager.requestPermission(Manifest.permission.SEND_SMS);
+        permissionManager.requestPermission(Manifest.permission.READ_PHONE_STATE);
+
         setTitle("그룹");
         setContentView(R.layout.activity_main);
 

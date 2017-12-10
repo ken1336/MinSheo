@@ -58,7 +58,7 @@
         android:visibility="gone" />
 
     <Button
-        android:id="@+id/create_group_btn"
+        android:id="@+id/send_group_msg_btn"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginBottom="5dp"
