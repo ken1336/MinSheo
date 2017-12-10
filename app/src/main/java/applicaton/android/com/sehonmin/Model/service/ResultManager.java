@@ -10,6 +10,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -30,6 +31,8 @@ import applicaton.android.com.sehonmin.observer.observer;
 public class ResultManager implements Subject {
     private ResultDAO dao;
     private observer ob;
+    private FormManager fm;
+    private GroupManager gm;
 
     private DatabaseReference myRef;
     private int field_num;
@@ -46,8 +49,8 @@ public class ResultManager implements Subject {
     private ResultManager(){
 
         map=new HashMap<String, ResultList>();
-
-
+        fm=FormManager.getInstance();
+        gm=GroupManager.getInstance();
         dao=ResultDAO.getInstance();
 
 
@@ -56,49 +59,45 @@ public class ResultManager implements Subject {
 
         myRef.addValueEventListener(new ValueEventListener() {
 
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-               /* if(dataSnapshot.getValue()==null) {
-                    Log.i("result managers","asdfasdf");
-                    notifyObservers();
-                    return;
-                }
-                try {
-                    Log.i("result managers","rm roading");
-                    JSONObject jo1 = new JSONObject(dataSnapshot.getValue().toString());
-                    int count = jo1.names().length();
-                    for (int i = 0; i < count; i++) {
-                        Log.i("result managers","dataSnapshot.getValue().toString()");
-                        String formName=jo1.names().get(0).toString();
-                        String str = jo1.get(jo1.names().get(i).toString()).toString();
-                        JSONObject ja = new JSONObject(str);
-                        ResultList list=new ResultList(jo1.names().get(i).toString());
-                        int count2=ja.names().length();
-                        for(int k=0;k<count2;k++){
-                            Log.i("result managers","ja");
-                            ResultDTO dto=new ResultDTO(ja.names().get(k).toString());
-                            String str2=ja.get(ja.names().get(k).toString()).toString();
-                            JSONObject ja2=new JSONObject(str2);
-                            int ja2Size=ja2.length();
-                            for(int t=0;t<ja2Size;t++){
-                                dto.put(ja2.names().get(t).toString(),ja2.get(ja2.names().get(t).toString()).toString());
+
+                    for (DataSnapshot childSnapShot : dataSnapshot.getChildren()) {
+                        String formName = childSnapShot.getKey().toString();
+
+                        ResultList list=new ResultList(formName);
+                        List list2=fm.getItemList();
+                        for(int i=0;i<list2.size();i++){
+                            FormDTO fdto=(FormDTO)list2.get(i);
+                           list.setGroupID(fdto.getGroupID());
+                           list.setStartDay(fdto.getStartDay());
+                           list.setEndDay(fdto.getEndDay());
+
+                           list.setComment(fdto.getComment());
+                            Log.i("ssses", fdto.getComment());
+                        }
+                        Iterator it=dataSnapshot.getChildren().iterator();
+                        while(it.hasNext()){
+
+                            DataSnapshot key=(DataSnapshot)it.next();
+
+                            Iterator it2=key.getChildren().iterator();
+                            while(it2.hasNext()){
+                                DataSnapshot key2=(DataSnapshot)it2.next();
+                                Iterator it3=key2.getChildren().iterator();
+                                ResultDTO rdto=new ResultDTO(key2.getKey());
+                                while(it3.hasNext()){
+                                    DataSnapshot key3=(DataSnapshot)it3.next();
+                                    rdto.put(key3.getKey(),key3.getValue());
+                                }
+                                list.put(rdto);
                             }
-                            list.put(dto);
-                            FormManager fm=FormManager.getInstance();
-                            String startDay=fm.getForm(list.getFormName()).getStartDay();
-                            String endDay=fm.getForm(list.getFormName()).getEndDay();
-                            String groupID=fm.getForm(list.getFormName()).getGroupID();
-                            list.setEndDay(endDay);
-                            list.setStartDay(startDay);
-                            list.setGroupID(groupID);
-                            Log.i("result managers","ja");
                         }
                         map.put(formName,list);
-                    }*/
+                    }
                     notifyObservers();
-               /* } catch (JSONException e) {
-                    e.printStackTrace();
-                }*/
+                    return;
 
             }
 
@@ -145,6 +144,11 @@ public class ResultManager implements Subject {
         dao.deleteField(dto);
     }
 */
+   public void deleteResult(String formName){
+       map.remove(formName);
+       dao.deleteResult(formName);
+
+   }
    public List getItemList(){
        List<ResultList> list=new ArrayList<>();
 
@@ -158,6 +162,24 @@ public class ResultManager implements Subject {
        }
 
        return list;
+   }
+
+   public String getStatistic(String resultName){
+       return map.get(resultName).getPaticipation()+"/"+gm.getTotalGroupMember();
+   }
+   public String getComment(String resultName){
+       Log.i("sstss1",map.get(resultName).getFormName());
+       if(map.get(resultName).getComment().equals("")){
+           Log.i("sstss2","null");
+       }
+       Log.i("sstss2",map.get(resultName).getComment());
+       return map.get(resultName).getComment();
+   }
+   public String getEndDay(String resultName){
+       return map.get(resultName).getEndDay();
+   }
+   public String getGroupID(String resultName){
+       return map.get(resultName).getGroupID();
    }
 
 }

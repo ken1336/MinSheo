@@ -1,11 +1,14 @@
 package applicaton.android.com.sehonmin.ui.util.recyclerview;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -17,6 +20,7 @@ import applicaton.android.com.sehonmin.Model.dto.FormDTO;
 import applicaton.android.com.sehonmin.Model.dto.ResultDTO;
 import applicaton.android.com.sehonmin.Model.dto.ResultList;
 import applicaton.android.com.sehonmin.Model.service.FormManager;
+import applicaton.android.com.sehonmin.Model.service.GroupManager;
 import applicaton.android.com.sehonmin.Model.service.ResultManager;
 import applicaton.android.com.sehonmin.R;
 import applicaton.android.com.sehonmin.ResultActivity;
@@ -31,7 +35,10 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Vi
 
     private ResultList dto;
     public ResultListAdapter(){
+
         list= ResultManager.getInstance().getItemList();
+        Log.i("sssss","listadapter start"+list.size());
+
     }
     private Context context;
 
@@ -51,6 +58,7 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Vi
         dto=list.get(position);
         TextView textView = holder.nameTextView;
         textView.setText(dto.getFormName());
+        Log.i("sssss",dto.getFormName());
 
 
 
@@ -63,7 +71,7 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView nameTextView;
-        public Switch mSwitchBtn;
+        public Button delButton;
         private Context context;
         private LinearLayout layout;
         ResultListAdapter.ViewHolder holder;
@@ -71,10 +79,17 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Vi
         boolean check=false;
 
 
-        public ViewHolder(Context context, View itemView) {
+        public ViewHolder(Context context, final View itemView) {
             super(itemView);
             nameTextView = (TextView) itemView.findViewById(R.id.contact_name);
-            //mSwitchBtn = (Switch) itemView.findViewById(R.id.message_button);
+            delButton = (Button) itemView.findViewById(R.id.message_button);
+            delButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    show2();
+
+                }
+            });
             layout=(LinearLayout)itemView.findViewById(R.id.testlayout);
             layout.setOnClickListener(this);
 
@@ -93,6 +108,36 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Vi
             intent.putExtra("data",list.get(holder.getPosition()).getFormName());
 
             context.startActivity(intent);
+        }
+        public void show2() {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            LayoutInflater inflater = LayoutInflater.from(context);
+            View view = inflater.inflate(R.layout.del_group_dialog, null);
+
+            builder.setView(view);
+            final Button mOkBtn = (Button) view.findViewById(R.id.del_group_yes_btn);
+            final Button mCancelBtn = (Button) view.findViewById(R.id.del_group_no_btn);
+
+            final AlertDialog dialog = builder.create();
+            mOkBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String resultName=list.get(getPosition()).getFormName();
+                    ResultManager.getInstance().deleteResult(resultName);
+                    list.remove(getPosition());
+                    notifyDataSetChanged();
+                    dialog.dismiss();
+                }
+            });
+            mCancelBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
         }
     }
 }

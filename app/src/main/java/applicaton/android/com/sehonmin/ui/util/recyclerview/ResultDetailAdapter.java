@@ -59,7 +59,7 @@ public class ResultDetailAdapter extends RecyclerView.Adapter<ResultDetailAdapte
         resultDetailKey.setText(list.get(position)[0].toString()+" : ");
         Log.i("ssts",list.get(position)[0].toString()+","+list.size());
         TextView resultDetaiValue = holder.resultDetailValue;
-        resultDetaiValue.setText(list.get(position)[1].toString()+" : ");
+        resultDetaiValue.setText(list.get(position)[1].toString());
         Log.i("ssts",list.get(position)[1].toString());
 
 

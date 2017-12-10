@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import applicaton.android.com.sehonmin.Model.service.ResultManager;
 import applicaton.android.com.sehonmin.R;
 import applicaton.android.com.sehonmin.ui.util.recyclerview.ResultListAdapter;
+import applicaton.android.com.sehonmin.ui.util.recyclerview.itemdecoration.MarginItemDecoration;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +43,8 @@ public class ThirdListFragment extends Fragment implements View.OnClickListener{
         rvContacts.setAdapter(adapter);
         rvContacts.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        rvContacts.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+        rvContacts.addItemDecoration(new MarginItemDecoration(20));
 
     }
 

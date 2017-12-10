@@ -110,6 +110,12 @@ public class FormManager implements Subject {
         formDAO.getRef().child(formDTO.getName()).removeValue();
     }
 
+    public FormDTO getForm(int num){
+        return formDTOArrayList.get(num);
+    }
+    public Map getMap(){
+        return hashMap;
+    }
     @Override
     public void notifyObservers() {
         ob.onCompleteLoad();
@@ -123,4 +129,15 @@ public class FormManager implements Subject {
         return formDTOArrayList;
     }
 
+    public String getComment(String resultName){
+
+        int count=formDTOArrayList.size();
+        for(int i=0;i<count;i++) {
+            FormDTO dto=formDTOArrayList.get(i);
+            if(dto.getName().equals(resultName)){
+                return dto.getComment();
+            }
+        }
+        return null;
+    }
 }

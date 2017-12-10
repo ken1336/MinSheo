@@ -51,9 +51,9 @@ public class ResultParticipateAdapter extends RecyclerView.Adapter<ResultPartici
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         dto=(ResultDTO)list.getList().get(position);
-        Log.i("sssss",dto.getFormName());
+        Log.i("sssss",dto.getName());
         TextView textView = holder.nameTextView;
-        textView.setText(dto.getFormName());
+        textView.setText(dto.getName());
 
 
 
@@ -98,9 +98,6 @@ public class ResultParticipateAdapter extends RecyclerView.Adapter<ResultPartici
 
                 check=true;
                 ResultDTO dto = (ResultDTO) list.getList().get(holder.getPosition());
-                Toast.makeText(context, dto.getFormName(), Toast.LENGTH_LONG).show();
-
-                Log.i("ssts","click");
                 ResultDetailAdapter adapter = new ResultDetailAdapter(dto);
                 adapter.notifyDataSetChanged();
 

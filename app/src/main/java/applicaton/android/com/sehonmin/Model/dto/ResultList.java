@@ -16,6 +16,7 @@ public class ResultList {
     private String formName;
     private String startDay;
     private String endDay;
+    private String comment;
 
     public void setFormName(String formName) {
         this.formName = formName;
@@ -24,7 +25,12 @@ public class ResultList {
     public String getStartDay() {
         return startDay;
     }
-
+    public void setComment(String comment){
+        this.comment=comment;
+    }
+    public String getComment(){
+        return comment;
+    }
     public void setStartDay(String startDay) {
         this.startDay = startDay;
     }
@@ -62,6 +68,8 @@ public class ResultList {
     public void put(ResultDTO dto){
         list.add(dto);
     }
+    public int getPaticipation(){return list.size();}
+
 
 
 }

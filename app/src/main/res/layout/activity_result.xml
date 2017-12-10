@@ -14,10 +14,159 @@
         android:background="#ffffff">
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="192dp"
+            android:layout_height="match_parent"
             android:background="#f6eddc"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/result_detail_name"
+                    android:layout_weight="1"
+                    android:text="asdfasdfadsf"
 
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:textColor="#555555"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="10dp"
+
+                >
+                <TextView
+                    android:background="@drawable/inner_box_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="종료일:"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="#555555"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/divider2" />
+                <TextView
+                    android:background="@drawable/inner_box_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/result_detail_endday_value"
+                    android:layout_weight="1"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:textStyle="bold"
+
+                    android:textSize="20sp"
+                    android:textColor="#555555"
+                    />
+                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginHorizontal="10dp"
+
+                    >
+                    <TextView
+                        android:background="@drawable/inner_box_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:text="설정그룹:"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:textColor="#555555"
+                        />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/divider2" />
+                    <TextView
+                        android:background="@drawable/inner_box_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/result_detail_group"
+                        android:layout_weight="1"
+                        android:layout_gravity="right"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:textColor="#555555"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginHorizontal="10dp"
+
+                    >
+                    <TextView
+                        android:background="@drawable/inner_box_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:text="참여도:"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:textColor="#555555"
+                        />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/divider2" />
+                    <TextView
+                        android:background="@drawable/inner_box_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/result_detail_statistic"
+                        android:layout_weight="1"
+                        android:layout_gravity="right"
+                        android:gravity="center"
+                        android:textStyle="bold"
+
+                        android:textSize="20sp"
+                        android:textColor="#555555"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginHorizontal="10dp"
+
+                    >
+                    <TextView
+                        android:background="@drawable/inner_box_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:id="@+id/result_detail_comment"
+                        android:layout_weight="1"
+                        android:text="asdfasdfadsf"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:textColor="#555555"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
 
 
             <android.support.v7.widget.Toolbar

@@ -9,17 +9,19 @@ import java.util.Map;
  */
 
 public class ResultDTO {
-    private String formName;
+    private String name;
+
 
     private Map<String, Object> map;
 
     public ResultDTO(String formName){
-        this.formName=formName;
+        this.name=formName;
         map=new HashMap<String, Object>();
 
     }
-    public String getFormName(){
-        return formName;
+
+    public String getName(){
+        return name;
     }
     public void put(String key, Object obj){
         map.put(key, obj);

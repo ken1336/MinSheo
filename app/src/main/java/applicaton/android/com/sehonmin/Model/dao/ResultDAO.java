@@ -3,6 +3,8 @@ package applicaton.android.com.sehonmin.Model.dao;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Map;
+
 import applicaton.android.com.sehonmin.usermanagement.core.User;
 
 /**
@@ -27,6 +29,10 @@ public class ResultDAO {
             instance=new ResultDAO();
         }
         return instance;
+    }
+    public void deleteResult(String resultName){
+        ref.child(resultName).removeValue();
+
     }
 
     public DatabaseReference getRef(){
