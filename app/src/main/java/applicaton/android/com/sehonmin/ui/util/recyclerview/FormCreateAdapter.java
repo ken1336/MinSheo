@@ -37,14 +37,14 @@ public class FormCreateAdapter extends RecyclerView.Adapter<FormCreateAdapter.Vi
         contents= dto;
 
         list=new ArrayList<String[]>();
-        Iterator it=dto.getElements().keySet().iterator();
+        /*Iterator it=dto.getElements().keySet().iterator();
         Map map=dto.getElements();
         list.add(new String[]{"add element","+"});
         while(it.hasNext()) {
             Object key = it.next();
             list.add(new String[]{key.toString(), map.get(key).toString()});
 
-        }
+        }*/
 
     }
     @Override
@@ -87,9 +87,9 @@ public class FormCreateAdapter extends RecyclerView.Adapter<FormCreateAdapter.Vi
         return list.size();
     }
 
-    public String getFormName(){
+    /*public String getFormName(){
         return contents.getFormName();
-    }
+    }*/
     public List getList(){
         return list;
     }
@@ -109,8 +109,6 @@ public class FormCreateAdapter extends RecyclerView.Adapter<FormCreateAdapter.Vi
         notifyDataSetChanged();
 
     }
-
-
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {

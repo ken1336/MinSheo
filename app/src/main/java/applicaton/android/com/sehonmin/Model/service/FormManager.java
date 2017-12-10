@@ -21,76 +21,60 @@ import applicaton.android.com.sehonmin.Model.dto.FormDTO;
 import applicaton.android.com.sehonmin.Model.dto.ResultDTO;
 import applicaton.android.com.sehonmin.observer.Subject;
 import applicaton.android.com.sehonmin.observer.observer;
+import applicaton.android.com.sehonmin.ui.util.recyclerview.FormListAdapter;
 import applicaton.android.com.sehonmin.usermanagement.core.User;
 
 /**
  * Created by ken13 on 2017-12-03.
  */
 
-public class FormManager implements Subject{
-
-
+public class FormManager implements Subject {
     public observer ob;
-    private FormDAO dao;
+    private FormDAO formDAO;
     private DatabaseReference myRef;
-    private Map<String , FormDTO> formMap;
-    private static FormManager instance=new FormManager();
+    private ArrayList<FormDTO> formDTOArrayList;
+    private HashMap<String, String> hashMap;
+    private static FormManager instance;
+    private FormListAdapter formListAdapter;
 
-
-    public static FormManager getInstance(){
-        if(instance==null)
-            instance=new FormManager();
+    public static FormManager getInstance() {
+        if (instance == null)
+            instance = new FormManager();
         return instance;
     }
 
-    private FormManager(){
-
-        formMap=new HashMap<String, FormDTO>();
-        dao=FormDAO.getInstance();
-        myRef=dao.getRef();
+    private FormManager() {
+        formDAO = FormDAO.getInstance();
+        myRef = formDAO.getRef();
+        formDTOArrayList = new ArrayList<FormDTO>();
+        hashMap = new HashMap<String,String>();
 
         myRef.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue()==null){
-                    notifyObservers();
-                    return;
-                }
-                try {
+                for (DataSnapshot childSnapShot : dataSnapshot.getChildren()) {
+                    String name = childSnapShot.getKey().toString();
 
-                    Log.i("sssss",dataSnapshot.getValue().toString());
-                    JSONObject jo1 = new JSONObject(dataSnapshot.getValue().toString());
-                    int count = jo1.names().length();
+                    if(hashMap.get(name) == null) {
+                        FormDTO formDTO = new FormDTO();
 
-                    for (int i = 0; i < count; i++) {
+                        formDTO.setName(name);
+                        formDTO.setStartDay((String) childSnapShot.child("startDay").getValue());
+                        formDTO.setEndDay((String) childSnapShot.child("endDay").getValue());
+                        formDTO.setComment((String) childSnapShot.child("comment").getValue());
+                        formDTO.setGroupID((String) childSnapShot.child("groupID").getValue());
+                        formDTOArrayList.add(formDTO);
 
-                        String str = jo1.get(jo1.names().get(i).toString()).toString();
-                        JSONObject ja = new JSONObject(str);
-                        FormDTO inDTO = new FormDTO(jo1.names().get(i).toString());
-                        int countj = ja.names().length();
-                        for (int t = 0; t < countj; t++) {
-                            if(ja.names().get(t).toString().equals("GroupID")){
-                                inDTO.setGroupID(ja.get(ja.names().get(t).toString()).toString());
-                            }else if(ja.names().get(t).toString().equals("EndDay")){
-                                inDTO.setEndDay(ja.get(ja.names().get(t).toString()).toString());
-                            }else if(ja.names().get(t).toString().equals("StartDay")){
-                                inDTO.setStartDay(ja.get(ja.names().get(t).toString()).toString());
-                            }else if(ja.names().get(t).toString().equals("comment")){
-                                inDTO.setComment(ja.get(ja.names().get(t).toString()).toString());
-                            }else
-                            inDTO.put(ja.names().getString(t), ja.get(ja.names().getString(t)));
-                        }
-                        formMap.put(jo1.names().get(i).toString(), inDTO);
-
-
+                        hashMap.put(name,name);
                     }
-                    notifyObservers();
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
 
+                if(formListAdapter!=null){
+                    formListAdapter.notifyDataSetChanged();
+                }
+
+                notifyObservers();
             }
 
             @Override
@@ -100,65 +84,43 @@ public class FormManager implements Subject{
 
         });
     }
-    public void createForm(String form_name){
-        FormDTO dto=new FormDTO(form_name);
-        dto.put("comment","input");
-        dto.put("Total","input");
-        dto.put("activation","input");
-        formMap.put(form_name,dto);
-    }
-    public FormDTO getForm(String form_name){
-        return formMap.get(form_name);
-    }
-    public void createFiled(String form_name, String key, String value){
 
-        FormDTO dto=formMap.get(form_name);
-        dto.put(key,value);
+    public void createForm(String formName, String startDay, String endDay, String comment, String groupID) {
+        FormDAO formDAO = FormDAO.getInstance();
+        DatabaseReference ref = formDAO.getRef().child(formName);
+        HashMap<String, Object> tmpMap = new HashMap<String, Object>();
+        tmpMap.put("startDay", startDay);
+        tmpMap.put("endDay", endDay);
+        tmpMap.put("comment", comment);
+        tmpMap.put("groupID", groupID);
 
-
+        ref.updateChildren(tmpMap);
     }
 
-    public void submitData(FormDTO dto){
-        dao.submitData(dto);
+    public FormListAdapter getFormListAdapter() {
+        return formListAdapter;
     }
 
+    public void setFormListAdapter(FormListAdapter formListAdapter) {
+        this.formListAdapter = formListAdapter;
+    }
 
-//////////////////////////////////////delete method///////////////////////////////////////////////////////////////////
-    /*
-    public void deleteForm(String form_name){
-        FormDTO dto=formMap.get(form_name);
-        dao.deleteForm(dto);
+    public void deleteForm(FormDTO formDTO){
+        formDTOArrayList.remove(formDTO);
+        formDAO.getRef().child(formDTO.getName()).removeValue();
     }
-    public void deleteKey(String form_name, String key){
-        FormDTO dto=formMap.get(form_name);
-        dto.remove(key);
-        dao.deleteField(dto);
-    }
-    */
 
     @Override
     public void notifyObservers() {
-
-        Log.i("ssts","fm on");
         ob.onCompleteLoad();
     }
 
-    public void setObserver(observer ob){
-        this.ob=ob;
+    public void setObserver(observer ob) {
+        this.ob = ob;
     }
 
-    public List getItemList(){
-        List<FormDTO> list=new ArrayList<>();
-
-        Iterator it=formMap.keySet().iterator();
-        while(it.hasNext()) {
-            Object key = it.next();
-
-            FormDTO d=formMap.get(key);
-            list.add(d);
-
-        }
-
-        return list;
+    public List getItemList() {
+        return formDTOArrayList;
     }
+
 }

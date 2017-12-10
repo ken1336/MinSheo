@@ -1,57 +1,22 @@
 package applicaton.android.com.sehonmin.Model.dto;
 
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
-
-import org.xmlpull.v1.XmlPullParser;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import applicaton.android.com.sehonmin.R;
-
 /**
- * Created by ken13 on 2017-12-03.
+ * Created by Park on 2017-12-10.
  */
-//
 
 public class FormDTO {
-
+    private String name;
     private String startDay;
     private String endDay;
-    private int total;
-    private boolean activation;
-    private String formName;
-    private Map<String, Object> map;
-    private String groupID;
     private String comment;
+    private String groupID;
 
-    public String getComment() {
-        return comment;
+    public String getName() {
+        return name;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public FormDTO(String formName){
-
-        total=1;
-        activation=false;
-        map=new HashMap<>();
-        this.formName=formName;
-
-    }
-
-    public String getGroupID() {
-        return groupID;
-    }
-
-    public void setGroupID(String groupID) {
-        this.groupID = groupID;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getStartDay() {
@@ -70,41 +35,19 @@ public class FormDTO {
         this.endDay = endDay;
     }
 
-    public int getTotal() {
-        return total;
+    public String getComment() {
+        return comment;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
-
-
-    public boolean isActivation() {
-        return activation;
+    public String getGroupID() {
+        return groupID;
     }
 
-    public void setActivation(boolean activation) {
-        this.activation = activation;
+    public void setGroupID(String groupID) {
+        this.groupID = groupID;
     }
-
-
-
-    public String getFormName(){
-        return formName;
-    }
-    public void put(String key, Object obj){
-        map.put(key, obj);
-    }
-    public void remove(String key){
-        map.remove(key);
-
-    }
-    public Map<String, Object> getElements(){
-        return map;
-    }
-    public String getMapElement(String key){
-        return (String)map.get(key);
-    }
-
 }

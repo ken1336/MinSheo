@@ -40,7 +40,7 @@ public class FormDAO {
         return ref;
     }
 
-    public void submitData(FormDTO dto){
+   /* public void submitData(FormDTO dto){
         dto.put("StartDay",dto.getStartDay());
         dto.put("EndDay",dto.getEndDay());
 
@@ -55,6 +55,6 @@ public class FormDAO {
     }
     public void deleteForm(FormDTO dto){
         ref.child(dto.getFormName()).removeValue();
-    }
+    }*/
 
 }

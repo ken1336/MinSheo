@@ -9,58 +9,57 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
 import applicaton.android.com.sehonmin.FormCreationActivity;
+import applicaton.android.com.sehonmin.Model.service.FormManager;
 import applicaton.android.com.sehonmin.R;
 import applicaton.android.com.sehonmin.ui.util.recyclerview.FormListAdapter;
+import applicaton.android.com.sehonmin.ui.util.recyclerview.itemdecoration.MarginItemDecoration;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SecondListFragment extends Fragment implements View.OnClickListener{
-    private RecyclerView rvContacts;
+    private RecyclerView rvForms;
     private Button mCreateBtn;
     private String formName;
-    private View view;
-
-    public SecondListFragment() {
-
-    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        rvForms = (RecyclerView) getActivity().findViewById(R.id.recycler_view);
+        mCreateBtn = (Button)getActivity().findViewById(R.id.create_form_btn);
 
-        mCreateBtn=(Button)getActivity().findViewById(R.id.create_form_btn);
         mCreateBtn.setOnClickListener(this);
 
         FormListAdapter adapter = new FormListAdapter();
-        adapter.notifyDataSetChanged();
 
-        rvContacts = (RecyclerView) getActivity().findViewById(R.id.recycler_view);
-        rvContacts.setAdapter(adapter);
-        rvContacts.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvForms.setAdapter(adapter);
+        rvForms.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvForms.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+        rvForms.addItemDecoration(new MarginItemDecoration(20));
+
+        FormManager.getInstance().setFormListAdapter(adapter);
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_second_list3, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_second_list3, container, false);
     }
 
     @Override
     public void onClick(View view) {
-
-
-        show();
-
+        Intent intent=new Intent(getActivity(),FormCreationActivity.class);
+        startActivity(intent);
     }
 
     public void show(){
@@ -79,9 +78,8 @@ public class SecondListFragment extends Fragment implements View.OnClickListener
             public void onClick(View v) {
                 formName=name.getText().toString();
                 dialog.dismiss();
-                Intent intent=new Intent(getActivity(),FormCreationActivity.class);
-                intent.putExtra("formName",formName);
-                startActivity(intent);
+
+
             }
         });
         mCancelBtn.setOnClickListener(new View.OnClickListener() {

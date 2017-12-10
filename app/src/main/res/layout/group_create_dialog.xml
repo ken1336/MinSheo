@@ -2,16 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/innerbox"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:background="@drawable/underbar"
         android:gravity="center"
-        android:padding="10dp"
+        android:padding="5dp"
         android:text="그룹 명을 입력해주세요."
         android:textColor="#FFFFFF" />
 
@@ -19,10 +18,7 @@
         android:id="@+id/group_create_dialog_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp" />
+        android:layout_margin="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,9 +29,7 @@
             android:id="@+id/group_create_dialog_ok_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/underbar"
             android:text="만들기"
@@ -45,9 +39,7 @@
             android:id="@+id/group_create_dialog_cancel_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/underbar"
             android:text="취소"

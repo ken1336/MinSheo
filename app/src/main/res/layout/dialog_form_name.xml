@@ -7,32 +7,41 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="input_dialog"
-        android:gravity="center"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="input form name"/>
+        android:layout_margin="10dp"
+        android:background="@drawable/underbar"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="설문 이름을 입력해주세요."
+        android:textColor="#FFFFFF" />
 
     <EditText
+        android:id="@+id/input_form_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/input_form_name"/>
+        android:layout_margin="10dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
+            android:id="@+id/btn_form_name_ok"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:text="OK"
-            android:id="@+id/btn_form_name_ok"/>
+            android:background="@drawable/underbar"
+            android:text="만들기"
+            android:textColor="#FFFFFF" />
+
         <Button
+            android:id="@+id/btn_form_name_cancel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:text="CANCEL"
-            android:id="@+id/btn_form_name_cancel"/>
+            android:background="@drawable/underbar"
+            android:text="취소"
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 </LinearLayout>

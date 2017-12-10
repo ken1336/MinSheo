@@ -58,7 +58,7 @@ public class ResultManager implements Subject {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue()==null) {
+               /* if(dataSnapshot.getValue()==null) {
                     Log.i("result managers","asdfasdf");
                     notifyObservers();
                     return;
@@ -94,11 +94,11 @@ public class ResultManager implements Subject {
                             Log.i("result managers","ja");
                         }
                         map.put(formName,list);
-                    }
+                    }*/
                     notifyObservers();
-                } catch (JSONException e) {
+               /* } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
 
             }
 
