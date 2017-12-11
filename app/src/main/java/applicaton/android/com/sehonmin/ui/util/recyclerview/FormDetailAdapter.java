@@ -7,10 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import applicaton.android.com.sehonmin.Model.dto.FormDTO;
+import applicaton.android.com.sehonmin.Model.dto.GroupDTO;
+import applicaton.android.com.sehonmin.Model.service.GroupManager;
 import applicaton.android.com.sehonmin.R;
+import applicaton.android.com.sehonmin.usermanagement.core.User;
 
 /**
  * Created by Park on 2017-12-10.
@@ -53,6 +58,12 @@ public class FormDetailAdapter extends RecyclerView.Adapter<FormDetailAdapter.Vi
                 holder.formDetailNameTextView.setText("설정그룹");
                 holder.formDetailContentTextView.setText(formDTO.getGroupID());
                 break;
+            case 4:
+                holder.formDetailNameTextView.setText("사이트주소");
+                GroupDTO groupDTO = GroupManager.getInstance().getGroupHashMap().get(formDTO.getGroupID());
+                ArrayList<String> groupPersonNameList = new ArrayList<String>(groupDTO.getGroupDTOHashMap().keySet());
+                HashMap<String, String> groupNamePhoneNumHashMap = groupDTO.getGroupDTOHashMap();
+                holder.formDetailContentTextView.setText("https://sehonmin.firebaseapp.com/?"+ User.getUserID() + "&" + formDTO.getName());
 
         }
         //FormDTO formDTO = formDTOList.get(position);
@@ -64,7 +75,7 @@ public class FormDetailAdapter extends RecyclerView.Adapter<FormDetailAdapter.Vi
     @Override
     public int getItemCount() {
         //formDTOList = FormManager.getInstance().getItemList();
-        return 4;
+        return 5;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
