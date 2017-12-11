@@ -24,7 +24,8 @@ public class LoadingActivity extends AppCompatActivity implements observer {
         ob=this;
         User user = User.getInstance(this);
         user.setObserver(this);
-        user.login(savedInstanceState.getString("id").toString(),savedInstanceState.getString("pw").toString());
+        Intent intent = getIntent();
+        user.login(intent.getStringExtra("id").toString(),intent.getStringExtra("pw").toString());
 
         Log.i("loading","시작...");
 
