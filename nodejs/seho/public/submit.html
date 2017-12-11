@@ -1,0 +1,48 @@
+
+<html>
+<head>
+<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+<script src="app.js"></script>
+<style>
+p { margin : 0 auto;}
+</style>
+<script>
+var query = document.location.href.split("?");
+var para = query[1].split("&");
+
+var user_id = para[0].split("=")[1];
+var form_id = para[1].split("=")[1];
+
+while(user_id.indexOf('%40')!=-1){
+	user_id = para[1].replace('%40',' ');
+}
+
+while(form_id.indexOf('+')!=-1){
+	form_id = form_id.replace('+',' ');
+}
+
+var myArray = new Array(para.length);
+
+var user_name = decodeURI(para[2].split("=")[1]);
+var serial_num = decodeURI(para[3].split("=")[1]);
+var agree = "off";
+
+if(para[4].split("=")[0] =="agree"){
+	agree = para[4].split("=")[1];
+}
+
+var result = { };
+
+result['user_name'] = user_name;
+result['serial_num'] = serial_num;
+result['agree'] = agree;
+
+const dbRef = firebase.database().ref('database/'+user_id+'/result/'+form_id+'/'+user_name);
+dbRef.set(result);
+
+</script>
+</head>
+<body>
+<p class="balloon">조사에 응해주셔서 감사합니다.</p>
+</body>
+</html>

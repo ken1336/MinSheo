@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="main.css">
+<title>SNM 수요조사 페이지</title>
+
+<!-- update the version number as needed -->
+<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+</head>
+<body>
+	<!-- Value -->
+	<pre id="object"></pre>
+	<pre id="object2"></pre>
+	<!-- Child -->
+	<ul id="list">
+
+	</ul>
+	<form id="survey" method="get" action="submit.html">
+		<input id="user_id" name="user_id" type="hidden"/>
+		<input id="form_id" name="from_id" type="hidden"/>
+		<table>
+			<thead>
+				<tr>
+					<td colspan="2">
+						
+					</td>
+				</tr>
+				<tr>
+					<th colspan="2">
+						<h1 id="title"></h1>
+					</th>
+				</tr>
+				
+			</thead>
+			<tr>
+				<th colspan="2"><h2>조사 진행 기간</h2></th>
+			</tr>
+			<tr>
+				<td id="sday">.</td><td id="eday">.</td>
+			</tr>
+			<tr>
+				<th colspan="2"><h2>수요조사 설명</h2></th>
+			</tr>
+			<tr>
+				<td id="comment" colspan="2">.</td>
+			</tr>
+			<tr>
+				<th colspan="2"><h2>조사 내용</h2></th>
+			</tr>
+			<tr>
+				<td>성함</td><td><input id="user_name" type="text" name="user_name"/></td>
+			</tr>
+			<tr>
+				<td></td><td></td>
+			</tr>
+			<tr>
+				<td>본인인증 번호</td><td><input id="serial_num" type="text" name="serial_num"/></td>
+			</tr>
+			</tr>
+			<tr>
+				<td></td><td></td>
+			</tr>
+			</tr>
+			<tr>
+				<td>동의 여부</td><td id="target"><input type="checkbox" name="agree"/></td>
+			</tr>
+			<tr>
+				<td></td><td></td>
+			</tr>
+			</tr>
+			<tr>
+				<td id="submit_result" colspan="2"><button id="submit_result" onclick="submitfunc();">제출하기</button></td>
+			</tr>
+		</table>
+	</form>
+	<script src="app.js"></script>
+	<script>
+      // Initialize Firebase
+      
+      const preObject = document.getElementById('object');
+      const preObject2 = document.getElementById('object2');
+      const ulList = document.getElementById('list');
+      const form = document.getElementById('survey');
+      const title = document.getElementById('title');
+      const comment = document.getElementById('comment');
+      const sday = document.getElementById('sday');
+      const eday = document.getElementById('eday');
+      const submit = document.getElementById('submit');
+      const user_id = document.getElementById('user_id');
+      const form_id = document.getElementById('form_id');
+      
+      // url 파라미터 가져오는 부분
+      var numOfPara = 0;
+      var query = document.location.href.split("?");
+      var para = query[1].split("&");
+      // 파라미터들을 받음 para[x]
+      /*
+      	설문이름
+      	시작날짜
+      	종료날짜
+      	설문설명
+      	본인확인번호
+      	설문대상본인이름
+      	수요조사
+      */
+      
+      while(para[1].indexOf('%20')!=-1){
+   		  para[1] = para[1].replace('%20',' ');
+      }
+    
+      title.innerHTML = para[1];
+      
+      var userId = para[0];
+      var formId = para[1]; // 설문 제목
+      user_id.value = para[0];
+      form_id.value = para[1];
+      // 파라미터를 담을 배열을 미리 선언
+      var paraArr = new Array(100);
+      
+      var formid2 = document.createElement('input');
+      formid2.type = 'hidden';
+      formid2.name = 'survey';
+      formid2.value = formId;
+      form.appendChild(formid2);
+      
+      const dbRef = firebase.database().ref('database/'+userId+'/form/'+formId).orderByKey();
+      
+    
+      
+      function submitfunc(){
+    	var query = "submit.html?survey="+formid;	 
+     	
+    	  for(var i = 0; i < numOfPara; i++){
+    		query += "&";
+    		query += encodeURI(paraArr[i].name);
+    		query += "=";
+    		query += encodeURI(paraArr[i].value);  
+    	  }
+    	  
+    	  location.href = query;
+      }
+      //submit.onclick = submitfunc;
+      dbRef.once('value').then( snap => {
+    	  comment.innerHTML = snap.child("comment").val();
+    	  sday.innerHTML = snap.child("startDay").val();
+    	  eday.innerHTML = snap.child("endDay").val();
+      });
+    </script>
+
+
+</body>
+</html>

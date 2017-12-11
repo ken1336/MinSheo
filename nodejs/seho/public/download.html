@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="main.css">
+<title>다운로드 센터</title>
+
+<!-- update the version number as needed -->
+<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<h1 id="title">다운로드 센터</h1>
+				</th>
+			</tr>
+
+		</thead>
+		<tr>
+			<td>ID</td>
+			<td><input id="user_id" type="text" id=name= "user_name" /></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>토큰번호</td>
+			<td><input id="token_num" type="text" name="serial_num" /></td>
+		</tr>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		</tr>
+		<script src="app.js"></script>
+		<script>
+		const id = document.getElementById("user_id");
+		const token = document.getElementById("token_num");
+		function submitfunc() {
+			var idValue = id.value;
+			var idValueArr = idValue.split("@");
+			idValue = idValueArr[0];
+			var tokenValue = token.value;
+			const dbRef = firebase.database().ref('database/'+idValue+'/token').orderByKey();
+			
+			dbRef.once('value').then( snap => {
+		  		var tokenV = snap.child('token').val();
+		      	if(tokenV != tokenValue){
+		    		  alert("토큰이 일치하지 않습니다.");
+		    		  return; 
+		      	}
+				var formId = snap.child('id').val();
+				
+				var storageRef = firebase.storage().ref(idValue+"/"+formId+".xls");
+				storageRef.getDownloadURL().then(function(url) {
+					var xhr = new XMLHttpRequest();
+					xhr.responseType = 'blob';
+					xhr.onload = function(event) {
+						var blob = xhr.response;
+					}
+					xhr.open('GET', url);
+					xhr.send();
+					location.href = url;
+				});
+			});
+			
+		}
+	</script>
+		<tr>
+			<td id="submit_result" colspan="2"><button id="submit_result"
+					onclick="submitfunc();">다운받기</button></td>
+		</tr>
+	</table>
+
+</body>
+</html>
