@@ -29,7 +29,7 @@ public class User{
     public static User instance;
     private boolean accessibility;
     //private static String userID;
-    private final static String userID="min";
+    private static String userID="min";
 
     private User(Activity activity){
         mAuth = FirebaseAuth.getInstance();
@@ -49,7 +49,9 @@ public class User{
     }
 
     public boolean logIn(String email, String password){
-        Log.i("kkkk","login :" +email+","+ password);
+        String str=email;
+        String[] id=email.split("@");
+        userID=id[0];
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
