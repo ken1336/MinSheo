@@ -48,7 +48,6 @@
                 android:layout_weight="10"
                 android:background="@drawable/innerbox"
                 android:gravity="center"
-                android:text="2017-12-09"
                 android:textSize="20sp" />
 
             <Button
@@ -76,7 +75,6 @@
                 android:layout_weight="10"
                 android:background="@drawable/innerbox"
                 android:gravity="center"
-                android:text="2017-12-09"
                 android:textSize="20sp" />
 
             <Button
@@ -86,7 +84,7 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/underbar"
-                android:text="시작 날짜 선택"
+                android:text="종료 날짜 선택"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 

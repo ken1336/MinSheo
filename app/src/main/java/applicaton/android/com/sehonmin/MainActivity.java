@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         PermissionManager permissionManager = PermissionManager.getInstance(this);
         permissionManager.requestPermission(Manifest.permission.READ_CONTACTS);
-        permissionManager.requestPermission(Manifest.permission.SEND_SMS);
         permissionManager.requestPermission(Manifest.permission.READ_PHONE_STATE);
 
         setTitle("그룹");

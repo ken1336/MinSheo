@@ -9,6 +9,7 @@
 
     <TextView
         android:id="@+id/group_details_name"
+        android:singleLine="true"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginLeft="30dp"
@@ -24,6 +25,7 @@
 
     <TextView
         android:id="@+id/group_details_phone_num"
+        android:singleLine="true"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"

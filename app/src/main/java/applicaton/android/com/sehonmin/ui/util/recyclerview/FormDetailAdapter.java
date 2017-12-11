@@ -2,6 +2,7 @@ package applicaton.android.com.sehonmin.ui.util.recyclerview;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +66,7 @@ public class FormDetailAdapter extends RecyclerView.Adapter<FormDetailAdapter.Vi
                 HashMap<String, String> groupNamePhoneNumHashMap = groupDTO.getGroupDTOHashMap();
                 String rname = formDTO.getName().replace(" ","%20");
                 holder.formDetailContentTextView.setText("https://sehonmin.firebaseapp.com/?"+ User.getUserID() + "&" + rname);
+                Linkify.addLinks(holder.formDetailContentTextView, Linkify.WEB_URLS);
 
         }
         //FormDTO formDTO = formDTOList.get(position);

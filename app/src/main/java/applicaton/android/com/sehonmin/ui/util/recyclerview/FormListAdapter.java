@@ -1,5 +1,6 @@
 package applicaton.android.com.sehonmin.ui.util.recyclerview;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +26,7 @@ import applicaton.android.com.sehonmin.Model.dto.FormDTO;
 import applicaton.android.com.sehonmin.Model.dto.GroupDTO;
 import applicaton.android.com.sehonmin.Model.service.FormManager;
 import applicaton.android.com.sehonmin.Model.service.GroupManager;
+import applicaton.android.com.sehonmin.Model.service.PermissionManager;
 import applicaton.android.com.sehonmin.R;
 import applicaton.android.com.sehonmin.usermanagement.core.User;
 
@@ -78,6 +80,7 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
             sendGroupMsgButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view2) {
+                    PermissionManager.getInstance().requestPermission(Manifest.permission.SEND_SMS);
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     LayoutInflater inflater = LayoutInflater.from(context);
                     View view = inflater.inflate(R.layout.send_msg_dialog, null);

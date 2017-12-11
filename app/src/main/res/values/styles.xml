@@ -11,18 +11,17 @@
         <item name="colorPrimaryDark">#303F9F</item>
         <!--   theme UI controls like checkboxes and text fields -->
         <item name="colorAccent">#4682b4</item>
-
-
+        <item name="android:statusBarColor">#523738</item>
 
     </style>
     <color name="date_set_btn_color">#4682b4</color>
     <color name="dim_foreground_disabled_material_dark1">#dcdcdc</color>
     <style name="SplashTheme" parent="@android:style/Theme.Light.NoTitleBar">
-        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:colorBackground">#523738</item>
     </style>
 
     <style name="LoginTheme" parent="@android:style/Theme.Light.NoTitleBar">
-        <item name="android:windowBackground">@drawable/start_up</item>
+        <item name="android:windowBackground">@drawable/background</item>
     </style>
 
     <style name="ButtonTheme" parent="@style/Widget.AppCompat.Button.Colored">
