@@ -40,7 +40,7 @@ public class LoginActivity extends Activity {
                 intent.putExtra("id",id);
                 intent.putExtra("pw",pw);
                 activity.startActivity(intent);
-
+                finish();
             }
         });
 
