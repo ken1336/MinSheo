@@ -28,6 +28,7 @@
 
             <EditText
                 android:id="@+id/editid"
+                android:singleLine="true"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="100dp"
@@ -38,6 +39,7 @@
 
             <EditText
                 android:id="@+id/editpw"
+                android:singleLine="true"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="100dp"

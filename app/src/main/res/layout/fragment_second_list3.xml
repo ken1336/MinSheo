@@ -1,9 +1,8 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="applicaton.android.com.sehonmin.ui.core.SecondListFragment">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="0dp">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -18,16 +17,14 @@
         android:layout_weight="16"
         android:scrollbars="vertical" />
 
-    <Button
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/create_form_btn"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/button"
-        android:text="수요조사 만들기" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="25dp"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/cal2"
+        android:backgroundTint="#f6eddc"/>
+
+</FrameLayout>

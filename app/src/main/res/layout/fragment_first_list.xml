@@ -27,8 +27,8 @@
         android:layout_gravity="right|bottom"
         android:layout_marginBottom="25dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/cal"
-        android:backgroundTint="#523738" />
+        android:src="@drawable/cal2"
+        android:backgroundTint="#f6eddc" />
     <!--<Button
 
         android:layout_width="fill_parent"

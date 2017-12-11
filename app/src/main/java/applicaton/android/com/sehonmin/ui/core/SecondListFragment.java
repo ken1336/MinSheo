@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,23 +29,45 @@ import applicaton.android.com.sehonmin.ui.util.recyclerview.itemdecoration.Margi
  */
 public class SecondListFragment extends Fragment implements View.OnClickListener{
     private RecyclerView rvForms;
-    private Button mCreateBtn;
+    private FloatingActionButton mCreateBtn;
     private String formName;
+    private  LinearLayoutManager linearLayoutManager;
+    private int visibleItemCount;
+    private int totalItemCount;
+    private int pastVisiblesItems;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         rvForms = (RecyclerView) getActivity().findViewById(R.id.recycler_view);
-        mCreateBtn = (Button)getActivity().findViewById(R.id.create_form_btn);
+        mCreateBtn = (FloatingActionButton)getActivity().findViewById(R.id.create_form_btn);
 
         mCreateBtn.setOnClickListener(this);
 
         FormListAdapter adapter = new FormListAdapter();
 
         rvForms.setAdapter(adapter);
-        rvForms.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvForms.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+        linearLayoutManager =new LinearLayoutManager(getActivity());
+        rvForms.setLayoutManager(linearLayoutManager);
         rvForms.addItemDecoration(new MarginItemDecoration(20));
+
+        rvForms.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) //check for scroll down
+                {
+                    visibleItemCount = linearLayoutManager.getChildCount();
+                    totalItemCount = linearLayoutManager.getItemCount();
+                    pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
+
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        mCreateBtn.setVisibility(View.GONE);
+                        return;
+                    }
+                }
+                mCreateBtn.setVisibility(View.VISIBLE);
+            }
+        });
 
         FormManager.getInstance().setFormListAdapter(adapter);
 
