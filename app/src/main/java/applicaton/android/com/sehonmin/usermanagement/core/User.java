@@ -14,15 +14,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
+import applicaton.android.com.sehonmin.LoadingActivity;
 import applicaton.android.com.sehonmin.LoginActivity;
 import applicaton.android.com.sehonmin.MainActivity;
-import applicaton.android.com.sehonmin.SplashActivity;
+import applicaton.android.com.sehonmin.observer.Subject;
+import applicaton.android.com.sehonmin.observer.observer;
 
 /**
  * Created by ken13 on 2017-11-29.
  */
 
-public class User{
+public class User implements Subject{
     private final static String USERTAG="debug from user.class:";
     private FirebaseAuth mAuth;
     private Activity activity;
@@ -30,11 +33,13 @@ public class User{
     private boolean accessibility;
     //private static String userID;
     private static String userID="min";
+    private observer ob;
 
     private User(Activity activity){
         mAuth = FirebaseAuth.getInstance();
         Log.i(USERTAG,"어떠: "+ mAuth.toString());
         this.activity=activity;
+        ob = LoadingActivity.getContext();
 
     }
 
@@ -62,13 +67,15 @@ public class User{
                             //Log.d(USERTAG, "signInWithEmail:success");
                             //Log.i("kkkk","login:"+user.getEmail());
                             //userID=user.getEmail();
-
-                            activity.startActivity(new Intent(activity,MainActivity.class));
+                            notifyObservers();
+                            //activity.startActivity(new Intent(activity,LoadingActivity.class));
                             accessibility=true;
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(USERTAG, "signInWithEmail:failure", task.getException());
                             Log.i("kkkk","login failed");
+                            //activity.startActivity(new Intent(activity,LoginActivity.class));
                             accessibility=false;
                         }
 
@@ -103,6 +110,10 @@ public class User{
         return accessibility;
     }
 
+    @Override
+    public void notifyObservers(){
+        ob.onCompleteLoad();
+    }
 
     public Boolean getAccessibility(){
         return accessibility;

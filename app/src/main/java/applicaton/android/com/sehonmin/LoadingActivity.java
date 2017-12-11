@@ -14,7 +14,7 @@ import applicaton.android.com.sehonmin.observer.observer;
 
 public class LoadingActivity extends AppCompatActivity implements observer {
 
-    private int ready = 3;
+    private int ready = 4;
     private static observer ob;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +24,7 @@ public class LoadingActivity extends AppCompatActivity implements observer {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                FormManager fm= FormManager.getInstance();
-                ResultManager rm= ResultManager.getInstance();
-                GroupManager gm = GroupManager.getInstance();
-                rm.setObserver(LoadingActivity.getContext());
-                fm.setObserver(LoadingActivity.getContext());
-                gm.setObserver(LoadingActivity.getContext());
+
             }
         }).start();
 
@@ -46,7 +41,15 @@ public class LoadingActivity extends AppCompatActivity implements observer {
     @Override
     public void onCompleteLoad() {
         ready--;
-
+        Log.i("tag######",ready+" ::::asdfasdfadsasdfasdf###############");
+        if(ready == 3){
+            FormManager fm= FormManager.getInstance();
+            ResultManager rm= ResultManager.getInstance();
+            GroupManager gm = GroupManager.getInstance();
+            rm.setObserver(LoadingActivity.getContext());
+            fm.setObserver(LoadingActivity.getContext());
+            gm.setObserver(LoadingActivity.getContext());
+        }
         if(ready == 0) {
             Log.i("ssts","start!");
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
