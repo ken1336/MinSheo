@@ -15,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
+import java.util.Observer;
+
 import applicaton.android.com.sehonmin.LoadingActivity;
 import applicaton.android.com.sehonmin.LoginActivity;
 import applicaton.android.com.sehonmin.MainActivity;
@@ -39,21 +41,24 @@ public class User implements Subject{
         mAuth = FirebaseAuth.getInstance();
         Log.i(USERTAG,"어떠: "+ mAuth.toString());
         this.activity=activity;
-        ob = LoadingActivity.getContext();
 
+    }
+
+    public void setObserver(observer ob){
+        this.ob = ob;
     }
 
     public static User getInstance(Activity activity){
         if(instance==null)
             instance =new User(activity);
         return instance;
-
     }
+
     public static String getUserID(){
         return userID;
     }
 
-    public boolean logIn(String email, String password){
+    public boolean login(String email, String password){
         String str=email;
         String[] id=email.split("@");
         userID=id[0];
@@ -67,6 +72,8 @@ public class User implements Subject{
                             //Log.d(USERTAG, "signInWithEmail:success");
                             //Log.i("kkkk","login:"+user.getEmail());
                             //userID=user.getEmail();
+
+
                             notifyObservers();
                             //activity.startActivity(new Intent(activity,LoadingActivity.class));
                             accessibility=true;

@@ -11,6 +11,7 @@ import applicaton.android.com.sehonmin.Model.service.FormManager;
 import applicaton.android.com.sehonmin.Model.service.GroupManager;
 import applicaton.android.com.sehonmin.Model.service.ResultManager;
 import applicaton.android.com.sehonmin.observer.observer;
+import applicaton.android.com.sehonmin.usermanagement.core.User;
 
 public class LoadingActivity extends AppCompatActivity implements observer {
 
@@ -21,13 +22,9 @@ public class LoadingActivity extends AppCompatActivity implements observer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
         ob=this;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        }).start();
-
+        User user = User.getInstance(this);
+        user.setObserver(this);
+        user.login(savedInstanceState.getString("id").toString(),savedInstanceState.getString("pw").toString());
 
         Log.i("loading","시작...");
 

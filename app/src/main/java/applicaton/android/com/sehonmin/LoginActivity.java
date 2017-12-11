@@ -16,7 +16,6 @@ import applicaton.android.com.sehonmin.usermanagement.core.User;
  */
 
 public class LoginActivity extends Activity {
-    private User user;
     private EditText idText;
     private EditText pwText;
     private ImageButton lgBtn;
@@ -31,17 +30,16 @@ public class LoginActivity extends Activity {
         pwText = (EditText) findViewById(R.id.editpw);
         lgBtn = (ImageButton) findViewById(R.id.loginbtn);
 
-        user = User.getInstance(this);
-
         lgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String id = idText.getText().toString();
                 String pw = pwText.getText().toString();
-                Log.i("startActivie","##############################");
-                activity.startActivity(new Intent(activity,LoadingActivity.class));
-                Log.i("endasdfa","#################################");
-                user.logIn(id,pw);
+
+                Intent intent = new Intent(activity,LoadingActivity.class);
+                intent.putExtra("id",id);
+                intent.putExtra("pw",pw);
+                activity.startActivity(intent);
 
             }
         });
