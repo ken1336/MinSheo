@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -30,7 +31,7 @@ public class FirstListFragment extends Fragment implements View.OnClickListener 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         RecyclerView rvGroups = (RecyclerView) getActivity().findViewById(R.id.rvphone);
-        Button createGroupButton = (Button) getActivity().findViewById(R.id.create_group_btn);
+        FloatingActionButton createGroupButton = (FloatingActionButton) getActivity().findViewById(R.id.create_group_btn);
 
         groupAdapter = new GroupAdapter();
 

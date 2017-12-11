@@ -10,11 +10,11 @@
         <!--   darker variant for the status bar and contextual app bars -->
         <item name="colorPrimaryDark">#303F9F</item>
         <!--   theme UI controls like checkboxes and text fields -->
-        <item name="colorAccent">#4682b4</item>
+        <item name="colorAccent">#f6eddc</item>
         <item name="android:statusBarColor">#523738</item>
 
     </style>
-    <color name="date_set_btn_color">#4682b4</color>
+    <color name="date_set_btn_color">#523738</color>
     <color name="dim_foreground_disabled_material_dark1">#dcdcdc</color>
     <style name="SplashTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:colorBackground">#523738</item>
