@@ -28,6 +28,9 @@ public class GroupDTO {
     public void setGroupDTOHashMap(HashMap<String, String> groupDTOHashMap) {
         this.groupDTOHashMap = groupDTOHashMap;
     }
+    public int getSize(){
+        return getGroupDTOHashMap().size();
+    }
 
     public String getName() {
         return name;

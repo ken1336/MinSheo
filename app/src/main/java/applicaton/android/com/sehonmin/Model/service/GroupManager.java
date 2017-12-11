@@ -155,7 +155,8 @@ public class GroupManager implements Subject {
     public void setGroupDetailsAdapter(GroupDetailsAdapter groupDetailsAdapter) {
         this.groupDetailsAdapter = groupDetailsAdapter;
     }
-    public int getTotalGroupMember(){
-        return groupHashMap.size();
+    public int getTotalGroupMember(String groupID){
+        return groupHashMap.get(groupID).getSize();
+
     }
 }

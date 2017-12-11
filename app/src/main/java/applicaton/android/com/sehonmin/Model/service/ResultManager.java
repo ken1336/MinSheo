@@ -180,14 +180,15 @@ public class ResultManager implements Subject {
    }
 
    public String getStatistic(String resultName){
-       return map.get(resultName).getPaticipation()+"/"+gm.getTotalGroupMember();
+
+       return map.get(resultName).getPaticipation()+"/"+gm.getTotalGroupMember(map.get(resultName).getGroupID());
    }
    public String getComment(String resultName){
-       Log.i("sstss1",map.get(resultName).getFormName());
+
        if(map.get(resultName).getComment().equals("")){
-           Log.i("sstss2","null");
+
        }
-       Log.i("sstss2",map.get(resultName).getComment());
+
        return map.get(resultName).getComment();
    }
    public String getEndDay(String resultName){
