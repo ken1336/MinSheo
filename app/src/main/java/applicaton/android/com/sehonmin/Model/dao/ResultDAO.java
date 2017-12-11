@@ -35,6 +35,10 @@ public class ResultDAO {
 
     }
 
+    public void addForm(String formName){
+        ref.child(formName);
+    }
+
     public DatabaseReference getRef(){
         return ref;
     }

@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import applicaton.android.com.sehonmin.Model.dao.FormDAO;
+import applicaton.android.com.sehonmin.Model.dao.ResultDAO;
 import applicaton.android.com.sehonmin.Model.dto.FormDTO;
 import applicaton.android.com.sehonmin.Model.dto.ResultDTO;
 import applicaton.android.com.sehonmin.observer.Subject;
@@ -93,6 +94,7 @@ public class FormManager implements Subject {
         tmpMap.put("endDay", endDay);
         tmpMap.put("comment", comment);
         tmpMap.put("groupID", groupID);
+
 
         ref.updateChildren(tmpMap);
     }
