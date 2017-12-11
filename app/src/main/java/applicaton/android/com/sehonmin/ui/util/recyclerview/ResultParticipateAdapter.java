@@ -1,5 +1,6 @@
 package applicaton.android.com.sehonmin.ui.util.recyclerview;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,10 +29,15 @@ import applicaton.android.com.sehonmin.ResultActivity;
 public class ResultParticipateAdapter extends RecyclerView.Adapter<ResultParticipateAdapter.ViewHolder>  {
 
     private ResultList list;
-
+    private String formName;
     private ResultDTO dto;
+    private ResultActivity activity;
     private Context context;
-    public ResultParticipateAdapter(String formName){
+    public ResultParticipateAdapter(String formName, ResultActivity activity){
+        this.formName = formName;
+        this.activity=activity;
+        ResultManager.getInstance().setResultParticipateAdapter(this);
+
         list= (ResultList)ResultManager.getInstance().getMap().get(formName);
     }
 
@@ -50,7 +56,12 @@ public class ResultParticipateAdapter extends RecyclerView.Adapter<ResultPartici
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
+
+        list=(ResultList)ResultManager.getInstance().getMap().get(formName);
+        activity.setStatistic(ResultManager.getInstance().getStatistic(formName));
         dto=(ResultDTO)list.getList().get(position);
+
         Log.i("sssss",dto.getName());
         TextView textView = holder.nameTextView;
         textView.setText(dto.getName());
@@ -60,7 +71,7 @@ public class ResultParticipateAdapter extends RecyclerView.Adapter<ResultPartici
     }
     @Override
     public int getItemCount() {
-        return list.getList().size();
+        return ((ResultList)ResultManager.getInstance().getMap().get(formName)).getList().size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

@@ -19,6 +19,7 @@ import java.util.Map;
 import applicaton.android.com.sehonmin.Model.dto.FormDTO;
 import applicaton.android.com.sehonmin.Model.dto.ResultDTO;
 import applicaton.android.com.sehonmin.Model.service.FormManager;
+import applicaton.android.com.sehonmin.Model.service.ResultManager;
 import applicaton.android.com.sehonmin.R;
 
 /**
@@ -35,6 +36,7 @@ public class ResultDetailAdapter extends RecyclerView.Adapter<ResultDetailAdapte
         Map map=dto.getElements();
         Iterator it=map.keySet().iterator();
         Log.i("ssts",String.valueOf(map.size()));
+        ResultManager.getInstance().setDetailAdapter(this);
         while(it.hasNext()){
             Object key = it.next();
             list.add(new String[]{key.toString(), map.get(key).toString()});

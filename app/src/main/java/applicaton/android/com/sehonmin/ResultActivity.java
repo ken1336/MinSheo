@@ -60,7 +60,7 @@ public class ResultActivity extends AppCompatActivity {
 
 
 
-        ResultParticipateAdapter adapter = new ResultParticipateAdapter(formName);
+        ResultParticipateAdapter adapter = new ResultParticipateAdapter(formName,this);
         adapter.notifyDataSetChanged();
 
         rvContacts = (RecyclerView)findViewById(R.id.result_recycler_view);
@@ -74,6 +74,9 @@ public class ResultActivity extends AppCompatActivity {
 
 
 
+    }
+    public void setStatistic(String statistic){
+        this.statistic.setText(statistic);
     }
 
 }

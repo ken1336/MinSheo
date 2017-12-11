@@ -19,6 +19,11 @@ public class ResultDTO {
         map=new HashMap<String, Object>();
 
     }
+    public ResultDTO(){
+
+        map=new HashMap<String, Object>();
+
+    }
 
     public String getName(){
         return name;

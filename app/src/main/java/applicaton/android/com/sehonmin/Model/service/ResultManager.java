@@ -23,6 +23,9 @@ import applicaton.android.com.sehonmin.Model.dto.ResultDTO;
 import applicaton.android.com.sehonmin.Model.dto.ResultList;
 import applicaton.android.com.sehonmin.observer.Subject;
 import applicaton.android.com.sehonmin.observer.observer;
+import applicaton.android.com.sehonmin.ui.util.recyclerview.ResultDetailAdapter;
+import applicaton.android.com.sehonmin.ui.util.recyclerview.ResultListAdapter;
+import applicaton.android.com.sehonmin.ui.util.recyclerview.ResultParticipateAdapter;
 
 /**
  * Created by ken13 on 2017-12-04.
@@ -33,32 +36,42 @@ public class ResultManager implements Subject {
     private observer ob;
     private FormManager fm;
     private GroupManager gm;
-
+    private ResultDetailAdapter detailAdapter;
+    private ResultListAdapter resultListAdapter;
+    private ResultParticipateAdapter resultParticipateAdapter;
     private DatabaseReference myRef;
     private int field_num;
     public boolean ready=false;
-
     private Map<String , ResultList> map;
-
     public static ResultManager instance;
+
+
+    public void setDetailAdapter(ResultDetailAdapter detailAdapter) {
+        this.detailAdapter = detailAdapter;
+    }
+
+    public void setResultListAdapter(ResultListAdapter resultListAdapter) {
+        this.resultListAdapter = resultListAdapter;
+    }
+
+    public void setResultParticipateAdapter(ResultParticipateAdapter resultParticipateAdapter) {
+        this.resultParticipateAdapter = resultParticipateAdapter;
+    }
+
     public static ResultManager getInstance(){
         if(instance==null)
             instance=new ResultManager();
         return instance;
     }
+
     private ResultManager(){
 
         map=new HashMap<String, ResultList>();
         fm=FormManager.getInstance();
         gm=GroupManager.getInstance();
         dao=ResultDAO.getInstance();
-
-
-
         myRef=dao.getRef();
-
         myRef.addValueEventListener(new ValueEventListener() {
-
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -66,6 +79,7 @@ public class ResultManager implements Subject {
                     for (DataSnapshot childSnapShot : dataSnapshot.getChildren()) {
                         String formName = childSnapShot.getKey().toString();
 
+                        Log.i("stst2",formName);
                         ResultList list=new ResultList(formName);
                         List list2=fm.getItemList();
                         for(int i=0;i<list2.size();i++){
@@ -73,29 +87,30 @@ public class ResultManager implements Subject {
                            list.setGroupID(fdto.getGroupID());
                            list.setStartDay(fdto.getStartDay());
                            list.setEndDay(fdto.getEndDay());
-
                            list.setComment(fdto.getComment());
-                            Log.i("ssses", fdto.getComment());
                         }
-                        Iterator it=dataSnapshot.getChildren().iterator();
+
+                        Iterator it=dataSnapshot.child(formName).getChildren().iterator();
                         while(it.hasNext()){
 
                             DataSnapshot key=(DataSnapshot)it.next();
-
                             Iterator it2=key.getChildren().iterator();
+                            ResultDTO rdto=new ResultDTO(key.getKey());
                             while(it2.hasNext()){
                                 DataSnapshot key2=(DataSnapshot)it2.next();
-                                Iterator it3=key2.getChildren().iterator();
-                                ResultDTO rdto=new ResultDTO(key2.getKey());
-                                while(it3.hasNext()){
-                                    DataSnapshot key3=(DataSnapshot)it3.next();
-                                    rdto.put(key3.getKey(),key3.getValue());
-                                }
-                                list.put(rdto);
+                                rdto.put(key2.getKey(),key2.getValue().toString());
                             }
+                            list.put(rdto);
+                            map.put(formName,list);
+
                         }
-                        map.put(formName,list);
                     }
+                    if(resultListAdapter!=null)
+                        resultListAdapter.notifyDataSetChanged();
+                    if(resultParticipateAdapter!=null)
+                        resultParticipateAdapter.notifyDataSetChanged();
+                    if(detailAdapter!=null)
+                        detailAdapter.notifyDataSetChanged();
                     notifyObservers();
                     return;
 

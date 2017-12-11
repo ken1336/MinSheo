@@ -36,6 +36,7 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Vi
     private ResultList dto;
     public ResultListAdapter(){
 
+        ResultManager.getInstance().setResultListAdapter(this);
         list= ResultManager.getInstance().getItemList();
         Log.i("sssss","listadapter start"+list.size());
 
@@ -55,7 +56,7 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ResultListAdapter.ViewHolder holder, int position) {
-        dto=list.get(position);
+        dto=(ResultList)ResultManager.getInstance().getItemList().get(position);
         TextView textView = holder.nameTextView;
         textView.setText(dto.getFormName());
         Log.i("sssss",dto.getFormName());
@@ -65,7 +66,7 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Vi
     }
     @Override
     public int getItemCount() {
-        return list.size();
+        return ResultManager.getInstance().getItemList().size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -105,7 +106,7 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Vi
         public void onClick(View view) {
             //Animation animation = AnimationUtils.loadAnimation(context,R.anim.slide);
             Intent intent=new Intent(context, ResultActivity.class);
-            intent.putExtra("data",list.get(holder.getPosition()).getFormName());
+            intent.putExtra("data",((ResultList)ResultManager.getInstance().getItemList().get(holder.getPosition())).getFormName());
 
             context.startActivity(intent);
         }
