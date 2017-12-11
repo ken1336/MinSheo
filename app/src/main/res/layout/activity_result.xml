@@ -8,7 +8,7 @@
 
 
     <android.support.design.widget.AppBarLayout
-        android:layout_height="192dp"
+        android:layout_height="240dp"
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:background="#ffffff">
@@ -166,6 +166,7 @@
                         />
 
                 </LinearLayout>
+
             </LinearLayout>
 
 
@@ -185,5 +186,6 @@
         android:id="@+id/result_recycler_view"
 
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 
 </android.support.design.widget.CoordinatorLayout>

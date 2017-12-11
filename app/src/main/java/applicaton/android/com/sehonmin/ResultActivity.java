@@ -1,18 +1,15 @@
 package applicaton.android.com.sehonmin;
 
+
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
-
 import android.os.Bundle;
-
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.widget.TextView;
-
 import applicaton.android.com.sehonmin.Model.service.FormManager;
 import applicaton.android.com.sehonmin.Model.service.ResultManager;
 import applicaton.android.com.sehonmin.ui.util.recyclerview.ResultParticipateAdapter;
@@ -41,9 +38,8 @@ public class ResultActivity extends AppCompatActivity {
 
 
         String formName=intent.getStringExtra("data");
-        Log.i("sstss",rm.getComment(formName));
+       // Log.i("sstss",rm.getComment(formName));
         groupid=(TextView)findViewById(R.id.result_detail_group);
-
         formname=(TextView)findViewById(R.id.result_detail_name);
         statistic=(TextView)findViewById(R.id.result_detail_statistic);
         comment=(TextView)findViewById(R.id.result_detail_comment);
@@ -56,6 +52,7 @@ public class ResultActivity extends AppCompatActivity {
         Log.i("sstss",rm.getStatistic(formName));
         comment.setText(fm.getComment(formName));
         endday.setText(rm.getEndDay(formName));
+
 
 
 

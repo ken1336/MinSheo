@@ -9,23 +9,23 @@
     android:id="@+id/testlayout"
     android:clickable="true"
     >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
 
-                <TextView
-                    android:background="@drawable/inner_box_group"
-                    android:id="@+id/contact_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textColor="#555555"
-                    android:textSize="20sp"
-                    />
-                <!--<Button
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:background="@drawable/inner_box_group"
+            android:id="@+id/contact_name"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#555555"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <!--<Button
                     android:id="@+id/message_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -33,16 +33,29 @@
                     android:paddingRight="16dp"
                     android:textSize="10sp"
                     />-->
-                <Button
-                    android:id="@+id/message_button"
-                    android:layout_width="45dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:background="@drawable/del_group"
-                    android:layout_gravity="center"
-                    android:text="DEL"
-                    />
-        </LinearLayout>
+        <Button
+            android:id="@+id/message_button"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/del_group"
+            android:gravity="center"
+            android:text="DEL"
+
+
+            />
+
+        <Button
+
+            android:id="@+id/send_excel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+             />
+
+
+    </LinearLayout>
+
+
 
 
 </LinearLayout>

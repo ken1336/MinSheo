@@ -11,6 +11,7 @@ import java.security.acl.Group;
 import applicaton.android.com.sehonmin.Model.service.FormManager;
 import applicaton.android.com.sehonmin.Model.service.GroupManager;
 import applicaton.android.com.sehonmin.Model.service.ResultManager;
+import applicaton.android.com.sehonmin.Model.service.TokenManager;
 import applicaton.android.com.sehonmin.observer.observer;
 import applicaton.android.com.sehonmin.usermanagement.core.User;
 
@@ -48,6 +49,7 @@ public class LoadingActivity extends Activity implements observer {
             rm.setObserver(LoadingActivity.getContext());
             fm.setObserver(LoadingActivity.getContext());
             gm.setObserver(LoadingActivity.getContext());
+            TokenManager.getInstance();
         }
         if(ready == 0) {
             Log.i("ssts","start!");

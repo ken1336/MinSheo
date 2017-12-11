@@ -185,9 +185,9 @@ public class ResultManager implements Subject {
    }
    public String getComment(String resultName){
 
-       if(map.get(resultName).getComment().equals("")){
+      /* if(map.get(resultName).getComment().equals("")){
 
-       }
+       }*/
 
        return map.get(resultName).getComment();
    }

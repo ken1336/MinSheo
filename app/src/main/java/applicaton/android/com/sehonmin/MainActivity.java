@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         PermissionManager permissionManager = PermissionManager.getInstance(this);
         permissionManager.requestPermission(Manifest.permission.READ_CONTACTS);
         permissionManager.requestPermission(Manifest.permission.READ_PHONE_STATE);
+        permissionManager.requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
+        permissionManager.requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        permissionManager.requestPermission(Manifest.permission.INTERNET);
 
         setTitle("그룹");
         setContentView(R.layout.activity_main);
