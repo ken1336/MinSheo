@@ -1,5 +1,6 @@
 package applicaton.android.com.sehonmin;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +14,7 @@ import applicaton.android.com.sehonmin.Model.service.ResultManager;
 import applicaton.android.com.sehonmin.observer.observer;
 import applicaton.android.com.sehonmin.usermanagement.core.User;
 
-public class LoadingActivity extends AppCompatActivity implements observer {
+public class LoadingActivity extends Activity implements observer {
 
     private int ready = 4;
     private static observer ob;
