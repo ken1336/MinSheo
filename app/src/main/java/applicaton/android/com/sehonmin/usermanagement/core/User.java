@@ -14,6 +14,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import applicaton.android.com.sehonmin.LoadingActivity;
 import applicaton.android.com.sehonmin.LoginActivity;
 import applicaton.android.com.sehonmin.MainActivity;
 import applicaton.android.com.sehonmin.SplashActivity;
@@ -63,7 +64,7 @@ public class User{
                             //Log.i("kkkk","login:"+user.getEmail());
                             //userID=user.getEmail();
 
-                            activity.startActivity(new Intent(activity,MainActivity.class));
+                            activity.startActivity(new Intent(activity,LoadingActivity.class));
                             accessibility=true;
                         } else {
                             // If sign in fails, display a message to the user.
