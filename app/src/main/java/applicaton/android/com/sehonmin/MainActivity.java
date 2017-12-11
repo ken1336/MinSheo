@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.view.View;
+import android.widget.Toast;
 
 import applicaton.android.com.sehonmin.Model.service.FormManager;
 
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         PhoneBookManager.getInstance(this);
 
-        setOnclickListener();
+        //setOnclickListener();
         /*toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -97,33 +98,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    public void setOnclickListener() {
+    private int check = 1;
+    private Thread th = null;
+    @Override public void onBackPressed() { //super.onBackPressed();
 
-        /*first_fragment_btn = (Button) findViewById(R.id.btn_first);
-        second_fragment_btn = (Button) findViewById(R.id.btn_second);
-        third_fragment_btn = (Button) findViewById(R.id.btn_third);*/
-
-        /*first_fragment_btn.setOnClickListener(this);
-        first_fragment_btn.setTag(0);
-        second_fragment_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int tag = (int) view.getTag();
-                viewPager.setCurrentItem(tag);
-
-            }
-        });
-        second_fragment_btn.setTag(1);
-        third_fragment_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int tag = (int) view.getTag();
-                viewPager.setCurrentItem(tag);
-
-            }
-        });
-        third_fragment_btn.setTag(2);*/
-
+        if(th==null) {
+            Toast.makeText(this,"연속해서 누를 경우 앱이 종료됩니다.",Toast.LENGTH_SHORT).show();
+            th = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        sleep(1500);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    check = 1;
+                    th=null;
+                }
+            };
+            th.start();
+        }
+        if(check == 0){
+            finish();
+        }
+        check--;
     }
 
     @Override
