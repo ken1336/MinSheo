@@ -116,14 +116,35 @@ public class FormCreationActivity extends AppCompatActivity implements View.OnCl
         makeGroupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FormManager formManager = FormManager.getInstance();
-                formManager.createForm(formNameEditText.getText().toString(),
-                        startDay,
-                        endDay,
-                        formCommentEditText.getText().toString(),
-                        selectGroupTextView.getText().toString()
-                        );
-                formCreationActivity.finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(formCreationActivity);
+                LayoutInflater inflater = LayoutInflater.from(formCreationActivity);
+                View view2 = inflater.inflate(R.layout.activity_creation_form_error_dialog, null);
+
+                ListView groupListView = (ListView) view2.findViewById(R.id.group_list_view);
+                if(formNameEditText.getText().toString().equals("")||startDay==null||endDay==null||formCommentEditText.getText().toString().equals("")||selectGroupTextView.getText().toString().equals("")){
+                    builder.setView(view2);
+
+                    final AlertDialog dialog = builder.create();
+
+                    Button btn = (Button)view2.findViewById(R.id.form_error_btn);
+                    btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    dialog.show();
+                }else {
+                    FormManager formManager = FormManager.getInstance();
+                    formManager.createForm(formNameEditText.getText().toString(),
+                            startDay,
+                            endDay,
+                            formCommentEditText.getText().toString(),
+                            selectGroupTextView.getText().toString()
+                    );
+                    formCreationActivity.finish();
+                }
             }
         });
 
