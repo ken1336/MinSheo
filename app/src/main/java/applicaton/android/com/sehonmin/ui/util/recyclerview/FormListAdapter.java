@@ -98,12 +98,13 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
                             SmsManager smsManager = SmsManager.getDefault();
                             ArrayList<String> groupPersonNameList = new ArrayList<String>(groupDTO.getGroupDTOHashMap().keySet());
                             HashMap<String, String> groupNamePhoneNumHashMap = groupDTO.getGroupDTOHashMap();
-                            String message = "https://sehonmin.firebaseapp.com/?"+ User.getUserID() + "&" + formDTO.getName();
+                            String rname = formDTO.getName().replace(" ","%20");
+                            String message = "https://sehonmin.firebaseapp.com/?"+ User.getUserID() + "&" + rname;
                             message = message.replace(" ","%20");
-                            formNameTextView.setText(message);
-                            /*for(String name : groupPersonNameList){
+                            //formNameTextView.setText(message);
+                            for(String name : groupPersonNameList){
                                 smsManager.sendTextMessage(groupNamePhoneNumHashMap.get(name), null, message, null, null);
-                            }*/
+                            }
 
                             dialog.dismiss();
                         }

@@ -63,7 +63,8 @@ public class FormDetailAdapter extends RecyclerView.Adapter<FormDetailAdapter.Vi
                 GroupDTO groupDTO = GroupManager.getInstance().getGroupHashMap().get(formDTO.getGroupID());
                 ArrayList<String> groupPersonNameList = new ArrayList<String>(groupDTO.getGroupDTOHashMap().keySet());
                 HashMap<String, String> groupNamePhoneNumHashMap = groupDTO.getGroupDTOHashMap();
-                holder.formDetailContentTextView.setText("https://sehonmin.firebaseapp.com/?"+ User.getUserID() + "&" + formDTO.getName());
+                String rname = formDTO.getName().replace(" ","%20");
+                holder.formDetailContentTextView.setText("https://sehonmin.firebaseapp.com/?"+ User.getUserID() + "&" + rname);
 
         }
         //FormDTO formDTO = formDTOList.get(position);
