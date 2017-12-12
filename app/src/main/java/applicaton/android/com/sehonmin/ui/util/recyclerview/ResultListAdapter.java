@@ -158,9 +158,10 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Vi
 
             builder.setView(view);
 
+            String txt="https://sehonmin.firebaseapp.com/download.html\ntoken: "+token;
             final Button mOkBtn = (Button) view.findViewById(R.id.btn_token_ok);
             final TextView tv=(TextView)view.findViewById(R.id.token_view);
-            tv.setText(token);
+            tv.setText(txt);
             final AlertDialog dialog = builder.create();
             mOkBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

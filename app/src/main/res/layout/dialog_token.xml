@@ -11,7 +11,7 @@
         android:background="@drawable/underbar"
         android:gravity="center"
         android:padding="5dp"
-        android:text="토큰 번호"
+        android:text="아래의 URL에 접속해서 다운로드 받으세요."
         android:textColor="#FFFFFF" />
 
     <TextView
